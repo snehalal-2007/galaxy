@@ -191,20 +191,10 @@ const Index = () => {
         <MoonCanvas size={moonSize} />
       </div>
 
-      <div className="relative z-10 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
-        <Link to="/galaxy">
-          <Button variant="cosmic" size="lg">
-            Enter the Galaxy
-          </Button>
-        </Link>
+      <div className="relative z-10 mt-10 flex justify-center">
         <Link to="/about">
           <Button variant="cosmic" size="lg">
-            About
-          </Button>
-        </Link>
-        <Link to="/skills">
-          <Button variant="cosmic" size="lg">
-            Skills
+            Enter the galaxy
           </Button>
         </Link>
       </div>

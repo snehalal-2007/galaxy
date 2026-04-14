@@ -3,6 +3,7 @@ import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from "lucide-react";
 import portfolioData from "@/data/projects.json";
+import galaxyTelescopeAscii from "@/data/galaxy-telescope.txt?raw";
 
 /** Per-skill row with a small visual */
 export interface ProjectSkill {
@@ -264,6 +265,14 @@ const Galaxy = () => {
           </div>
         </div>
       )}
+
+      <pre
+        className="pointer-events-none fixed bottom-3 left-3 z-20 max-w-[min(100vw-1.25rem,380px)] overflow-x-auto font-mono text-[0.45rem] leading-[1.08] text-muted-foreground/80 [scrollbar-width:none] sm:bottom-4 sm:left-4 sm:text-[0.5rem] [&::-webkit-scrollbar]:hidden"
+        style={{ textShadow: "0 0 10px hsl(var(--glow-color) / 0.12)" }}
+        aria-hidden="true"
+      >
+        {galaxyTelescopeAscii.trimEnd()}
+      </pre>
     </CosmicPageShell>
   );
 };

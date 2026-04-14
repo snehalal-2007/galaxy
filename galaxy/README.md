@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# My portfolio
 
-TODO: Document your project here
+This repository contains my personal portfolio site.

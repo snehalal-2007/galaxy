@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import { renderMoonAsciiForPhaseDegrees } from "@/lib/realisticSkillsMoonAscii";
+import { SkillTechIcon } from "@/lib/skillTechIcons";
 import skillsData from "@/data/skills.json";
 
 /**
@@ -130,10 +131,11 @@ const Skills = () => {
                   {section.skills.map((s) => (
                     <li key={s.label}>
                       <span
-                        className="inline-block border border-border/80 bg-card/50 px-3 py-1.5 text-xs tracking-wide text-foreground backdrop-blur-sm transition hover:border-foreground/35 hover:bg-card/70"
+                        className="inline-flex items-center gap-2 border border-border/80 bg-card/50 px-2.5 py-1.5 text-xs tracking-wide text-foreground backdrop-blur-sm transition hover:border-foreground/35 hover:bg-card/70 md:px-3"
                         style={{ letterSpacing: "0.06em" }}
                       >
-                        {s.label}
+                        <SkillTechIcon label={s.label} />
+                        <span className="min-w-0">{s.label}</span>
                       </span>
                     </li>
                   ))}

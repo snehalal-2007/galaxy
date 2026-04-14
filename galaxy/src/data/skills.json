@@ -50,14 +50,18 @@
       "skills": [
         { "label": "Python" },
         { "label": "Java" },
-        { "label": "TypeScript" },
         { "label": "C++ (learning)" }
       ]
     },
     {
       "id": "frameworks-ui",
       "title": "Frameworks & UI",
-      "skills": [{ "label": "React" }, { "label": "HTML/CSS" }, { "label": "TypeScript" }]
+      "skills": [
+        { "label": "React" },
+        { "label": "HTML" },
+        { "label": "CSS" },
+        { "label": "TypeScript" }
+      ]
     },
     {
       "id": "databases",

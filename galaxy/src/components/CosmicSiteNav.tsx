@@ -28,7 +28,7 @@ function NavCosmicLink({
   );
 }
 
-/** Fixed top-left on every page except moon home (`/`). Order: Home → About → Skills → Mission Log → Galaxy. */
+/** Fixed top-left on every page except moon home (`/`). Order: Home → About → Skills → Experience → Galaxy. */
 export function CosmicSiteNav() {
   return (
     <nav
@@ -41,7 +41,7 @@ export function CosmicSiteNav() {
       </NavCosmicLink>
       <NavCosmicLink to="/about">About</NavCosmicLink>
       <NavCosmicLink to="/skills">Skills</NavCosmicLink>
-      <NavCosmicLink to="/mission-log">Mission Log</NavCosmicLink>
+      <NavCosmicLink to="/mission-log">Experience</NavCosmicLink>
       <NavCosmicLink to="/galaxy">Galaxy</NavCosmicLink>
     </nav>
   );

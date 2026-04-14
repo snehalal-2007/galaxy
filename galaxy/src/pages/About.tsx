@@ -1,11 +1,83 @@
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import profilePhoto from "@/data/profile.png";
 import profileDescription from "@/data/profile-description.json";
 
+/** `profile-description.json` — bio in `body`, links in `social`. */
+type ProfileSocial = {
+  /** Full URL to your GitHub profile */
+  github?: string;
+  /** Full URL to your LinkedIn profile; omit or use "" to hide the LinkedIn button */
+  linkedin?: string;
+  /** Address copied to clipboard when visitors click the mail icon */
+  email?: string;
+};
+
+type ProfileDescription = {
+  body: string;
+  social?: ProfileSocial;
+};
+
+const PROFILE = profileDescription as ProfileDescription;
+
 /** Bio text: edit `src/data/profile-description.json` — use `\\n\\n` between paragraphs. */
-const ABOUT_TYPEWRITER_TEXT = profileDescription.body as string;
+const ABOUT_TYPEWRITER_TEXT = PROFILE.body;
+
+const DEFAULT_GITHUB = "https://github.com/snehalal-2007";
+
+function AboutSocialRow() {
+  const s = PROFILE.social;
+  const githubHref = (s?.github?.trim() || DEFAULT_GITHUB) as string;
+  const linkedinHref = s?.linkedin?.trim();
+  const email = s?.email?.trim();
+
+  const copyEmail = async () => {
+    if (!email) {
+      toast.error("Add social.email in profile-description.json");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(email);
+      toast.success("Email copied to clipboard");
+    } catch {
+      toast.error("Could not copy email");
+    }
+  };
+
+  const iconBtn =
+    "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-card/50 text-foreground transition hover:border-foreground/40 hover:bg-card/70 hover:text-foreground";
+
+  return (
+    <div className="mt-0 flex flex-wrap items-center justify-center gap-3 border-t border-border/40 pt-3 md:col-span-2 md:justify-start md:gap-4 md:pt-4">
+      <a
+        href={githubHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={iconBtn}
+        aria-label="GitHub profile"
+      >
+        <Github className="h-5 w-5" strokeWidth={1.75} />
+      </a>
+      {linkedinHref && (
+        <a
+          href={linkedinHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={iconBtn}
+          aria-label="LinkedIn profile"
+        >
+          <Linkedin className="h-5 w-5" strokeWidth={1.75} />
+        </a>
+      )}
+      <button type="button" onClick={copyEmail} className={iconBtn} aria-label="Copy email address">
+        <Mail className="h-5 w-5" strokeWidth={1.75} />
+      </button>
+    </div>
+  );
+}
 
 /** Milliseconds per character at 1× (higher = slower). */
 const BASE_MS_PER_CHAR = 54;
@@ -103,7 +175,7 @@ const About = () => {
           </h1>
         }
       >
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 md:items-stretch">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-12 md:gap-y-4 md:items-stretch">
           {/* Left: square box + photo */}
           <div className="mx-auto w-full max-w-sm md:mx-0 md:max-w-none">
             <div
@@ -134,6 +206,8 @@ const About = () => {
               {speed.label}
             </button>
           </div>
+
+          <AboutSocialRow />
         </div>
       </CosmicStickyTitleLayout>
     </CosmicPageShell>

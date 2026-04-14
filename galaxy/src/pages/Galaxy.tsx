@@ -81,7 +81,7 @@ const Galaxy = () => {
         y: metaY,
         onSelect: () =>
           toast.message("You're in it", {
-            description: "This portfolio is the galaxy — you're already exploring it.",
+            description: "this portfolio is the galaxy! :)",
           }),
       },
     ];

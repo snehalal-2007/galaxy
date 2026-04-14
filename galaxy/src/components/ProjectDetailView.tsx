@@ -120,38 +120,33 @@ function ProjectGalleryBox({
         ) : null}
       </div>
 
-      <div className="min-h-0">
-        <p className="text-muted-foreground mb-2 text-[0.6rem] font-bold uppercase tracking-[0.18em]">
-          All shots — scroll sideways or pick a thumbnail
-        </p>
-        <div
-          className={cn(
-            "flex gap-2 overflow-x-auto overflow-y-hidden pb-2 pt-0.5",
-            "[scrollbar-width:thin] [scrollbar-color:hsl(var(--muted-foreground)/0.35)_transparent]",
-            "[&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/30"
-          )}
-        >
-          {images.map((src, i) => (
-            <button
-              key={`${projectId}-thumb-${i}`}
-              ref={(el) => {
-                thumbRefs.current[i] = el;
-              }}
-              type="button"
-              onClick={() => setIndex(i)}
-              className={cn(
-                "relative h-14 w-24 shrink-0 overflow-hidden rounded-md border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-[4.25rem] md:w-[7.25rem]",
-                i === index
-                  ? "border-foreground/55 ring-1 ring-foreground/25"
-                  : "border-border/60 opacity-85 hover:opacity-100"
-              )}
-              aria-label={`Show image ${i + 1}`}
-              aria-current={i === index ? "true" : undefined}
-            >
-              <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
-            </button>
-          ))}
-        </div>
+      <div
+        className={cn(
+          "min-h-0 flex gap-2 overflow-x-auto overflow-y-hidden pb-2 pt-0.5",
+          "[scrollbar-width:thin] [scrollbar-color:hsl(var(--muted-foreground)/0.35)_transparent]",
+          "[&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/30"
+        )}
+      >
+        {images.map((src, i) => (
+          <button
+            key={`${projectId}-thumb-${i}`}
+            ref={(el) => {
+              thumbRefs.current[i] = el;
+            }}
+            type="button"
+            onClick={() => setIndex(i)}
+            className={cn(
+              "relative h-14 w-24 shrink-0 overflow-hidden rounded-md border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-[4.25rem] md:w-[7.25rem]",
+              i === index
+                ? "border-foreground/55 ring-1 ring-foreground/25"
+                : "border-border/60 opacity-85 hover:opacity-100"
+            )}
+            aria-label={`Show image ${i + 1}`}
+            aria-current={i === index ? "true" : undefined}
+          >
+            <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+          </button>
+        ))}
       </div>
     </div>
   );

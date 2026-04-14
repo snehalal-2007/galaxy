@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const activeNavClass =
-  "border-foreground/55 bg-foreground/[0.08] shadow-[0_0_18px_hsl(var(--glow-color)/0.25)]";
+/** Merged on top of cosmic nav buttons when this route is active (`NavLink` must own `className` — not `Button asChild`). */
+const activeNavClass = "border-foreground/65 bg-foreground/[0.14]";
 
 function NavCosmicLink({
   to,
@@ -16,15 +16,15 @@ function NavCosmicLink({
   children: React.ReactNode;
 }) {
   return (
-    <Button variant="cosmic" size="sm" asChild>
-      <NavLink
-        to={to}
-        end={end}
-        className={({ isActive }) => cn(isActive && activeNavClass)}
-      >
-        {children}
-      </NavLink>
-    </Button>
+    <NavLink
+      to={to}
+      end={end}
+      className={({ isActive }) =>
+        cn(buttonVariants({ variant: "cosmic", size: "sm" }), isActive && activeNavClass)
+      }
+    >
+      {children}
+    </NavLink>
   );
 }
 

@@ -1,6 +1,6 @@
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
-import { MissionLogTimeline } from "@/components/MissionLogTimeline";
+import { MissionLogTimeline, type Experience } from "@/components/MissionLogTimeline";
 import experiencesData from "@/data/experiences.json";
 
 const experiences = experiencesData.experiences as Experience[];

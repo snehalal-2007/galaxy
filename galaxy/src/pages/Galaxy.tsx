@@ -46,14 +46,6 @@ function scatterForProject(id: string): { x: number; y: number } {
 
 const PROJECT_SEEDS: ProjectSeed[] = portfolioData.projects as ProjectSeed[];
 
-const TELESCOPE_ASCII = `      .--.
-     /    \\
-    | (__) |
-     \\____/
-       ||
-      /||\\
-     / || \\`;
-
 const Galaxy = () => {
   const [selected, setSelected] = useState<Project | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -272,14 +264,6 @@ const Galaxy = () => {
           </div>
         </div>
       )}
-
-      <pre
-        className="pointer-events-none fixed bottom-5 left-5 z-20 select-none font-mono text-[0.6rem] leading-tight text-muted-foreground/60 sm:text-[0.65rem]"
-        style={{ textShadow: "0 0 12px hsl(var(--glow-color) / 0.15)" }}
-        aria-hidden="true"
-      >
-        {TELESCOPE_ASCII}
-      </pre>
     </CosmicPageShell>
   );
 };

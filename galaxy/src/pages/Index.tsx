@@ -184,7 +184,7 @@ const Index = () => {
   return (
     <CosmicPageShell showNav={false} className="flex flex-col items-center justify-center">
       <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow mb-8 md:mb-12">
-        MY GALAXY
+        MY GAALXY
       </h1>
 
       <div className="relative z-10">

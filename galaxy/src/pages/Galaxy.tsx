@@ -72,7 +72,7 @@ const Galaxy = () => {
         }
         title={
           <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
-            MY GALAXY
+            MY GAALXY
           </h1>
         }
       >

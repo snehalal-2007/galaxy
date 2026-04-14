@@ -11,31 +11,57 @@ export type ProjectPortfolioEntry = {
   features?: string[];
   images: string[];
   skills: ProjectSkill[];
-  liveUrl: string;
+  liveUrl?: string;
   githubUrl: string;
 };
 
 const iconLinkBtn =
   "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-card/50 text-foreground transition hover:border-foreground/40 hover:bg-card/70 hover:text-foreground";
 
+/** True when `liveUrl` is a real deploy link (empty, invalid, or example.com = not deployed). */
+function isActiveLiveUrl(raw: string | undefined): boolean {
+  const s = raw?.trim() ?? "";
+  if (!s) return false;
+  try {
+    const u = new URL(s);
+    const host = u.hostname.toLowerCase();
+    if (host === "example.com" || host === "www.example.com") return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /** Live + GitHub icon links (used in the galaxy project sticky header). */
 export function ProjectExternalLinks({ project }: { project: ProjectPortfolioEntry }) {
   const githubHref = project.githubUrl?.trim();
-  const liveHref = project.liveUrl?.trim();
-  if (!githubHref && !liveHref) return null;
+  const liveRaw = project.liveUrl?.trim() ?? "";
+  const liveActive = isActiveLiveUrl(project.liveUrl);
+  if (!githubHref && !liveRaw) return null;
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
-      {liveHref ? (
-        <a
-          href={liveHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={iconLinkBtn}
-          aria-label={`${project.title} live site`}
-        >
-          <ExternalLink className="h-5 w-5" strokeWidth={1.75} />
-        </a>
+      {liveRaw ? (
+        liveActive ? (
+          <a
+            href={liveRaw}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={iconLinkBtn}
+            aria-label={`${project.title} live site`}
+          >
+            <ExternalLink className="h-5 w-5" strokeWidth={1.75} />
+          </a>
+        ) : (
+          <span
+            className={cn(iconLinkBtn, "cursor-not-allowed opacity-45")}
+            aria-disabled="true"
+            aria-label="Live site not deployed yet"
+            title="Not deployed yet"
+          >
+            <ExternalLink className="h-5 w-5" strokeWidth={1.75} />
+          </span>
+        )
       ) : null}
       {githubHref ? (
         <a

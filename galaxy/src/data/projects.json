@@ -52,12 +52,8 @@
           "imageUrl": "https://picsum.photos/seed/artiscii-skill-gl/120/120"
         },
         {
-          "name": "Rust",
+          "name": "JavaScript",
           "imageUrl": "https://picsum.photos/seed/artiscii-skill-rust/120/120"
-        },
-        {
-          "name": "WASM",
-          "imageUrl": "https://picsum.photos/seed/artiscii-skill-wasm/120/120"
         }
       ],
       "liveUrl": "https://example.com",
@@ -75,6 +71,8 @@
       ],
       "images": [
         "https://picsum.photos/seed/cooksie-a/640/360",
+        "https://picsum.photos/seed/cooksie-b/480/480",
+        "https://picsum.photos/seed/cooksie-c/640/360",
         "https://picsum.photos/seed/cooksie-b/480/480",
         "https://picsum.photos/seed/cooksie-c/640/360"
       ],
@@ -147,11 +145,15 @@
           "imageUrl": "https://picsum.photos/seed/fintor-skill-py/120/120"
         },
         {
-          "name": "DuckDB",
+          "name": "Finnhub",
           "imageUrl": "https://picsum.photos/seed/fintor-skill-duck/120/120"
         },
         {
-          "name": "D3",
+          "name": "React",
+          "imageUrl": "https://picsum.photos/seed/fintor-skill-d3/120/120"
+        },
+        {
+          "name": "Google Finance",
           "imageUrl": "https://picsum.photos/seed/fintor-skill-d3/120/120"
         }
       ],

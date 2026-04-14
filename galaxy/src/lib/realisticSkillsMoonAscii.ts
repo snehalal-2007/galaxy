@@ -1,5 +1,5 @@
-/** Same ramp as the user's HTML demo (realistic weighting). */
-export const REALISTIC_MOON_CHARS = [" ", ".", ":", "-", "=", "i", "l", "w", "W", "#", "@"] as const;
+/** Dark → light ramp; extra mid glyphs so tone-mapped maria read as texture, not one repeated dash. */
+export const REALISTIC_MOON_CHARS = [" ", ".", ",", ":", "-", "~", "=", "+", "i", "l", "w", "W", "#", "@"] as const;
 
 function mulberry32(seed: number) {
   return function rand() {
@@ -72,6 +72,22 @@ function setSunFromPhaseDeg(sunLight: import("three").DirectionalLight, phaseDeg
   sunLight.position.set(Math.sin(angle) * radius, 0, -Math.cos(angle) * radius);
 }
 
+function luminanceAt(pixels: Uint8Array, cols: number, x: number, y: number): number {
+  const idx = (y * cols + x) * 4;
+  return (pixels[idx] + pixels[idx + 1] + pixels[idx + 2]) / 3;
+}
+
+/** Stable pseudo-noise in [-1, 1] for (x, y) — breaks flat lit faces into crater-like ASCII. */
+function asciiSurfaceNoise(x: number, y: number): number {
+  const s = Math.sin(x * 12.9898 + y * 78.233 + y * 0.01 * x) * 43758.5453123;
+  const f = s - Math.floor(s);
+  return f * 2 - 1;
+}
+
+/**
+ * Maps framebuffer → ASCII: disc mask clears corners, percentile tone-map rescues thin crescents
+ * (otherwise almost everything maps to space), micro-noise + min contrast spread maria on full moon.
+ */
 function readAsciiLines(
   gl: WebGLRenderingContext | WebGL2RenderingContext,
   cols: number,
@@ -81,14 +97,53 @@ function readAsciiLines(
   const pixels = new Uint8Array(cols * rows * 4);
   gl.readPixels(0, 0, cols, rows, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
 
+  const cx = (cols - 1) / 2;
+  const cy = (rows - 1) / 2;
+  const rx = cols * 0.505;
+  const ry = rows * 0.505;
+
+  const inDisc = (x: number, y: number): boolean => {
+    const dx = (x - cx) / rx;
+    const dy = (y - cy) / ry;
+    return dx * dx + dy * dy <= 1;
+  };
+
+  const samples: number[] = [];
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (inDisc(x, y)) samples.push(luminanceAt(pixels, cols, x, y));
+    }
+  }
+
+  let lo = 0;
+  let hi = 255;
+  if (samples.length > 0) {
+    samples.sort((a, b) => a - b);
+    const n = samples.length;
+    const iLo = Math.floor(n * 0.05);
+    const iHi = Math.ceil(n * 0.97) - 1;
+    lo = samples[Math.max(0, Math.min(n - 1, iLo))]!;
+    hi = samples[Math.max(0, Math.min(n - 1, Math.max(iLo, iHi)))]!;
+  }
+
+  const span = Math.max(26, hi - lo);
+  const maxIdx = chars.length - 1;
+
   const lines: string[] = [];
   for (let y = rows - 1; y >= 0; y--) {
     let row = "";
     for (let x = 0; x < cols; x++) {
-      const idx = (y * cols + x) * 4;
-      const brightness = (pixels[idx] + pixels[idx + 1] + pixels[idx + 2]) / 3;
-      const charIndex = Math.floor((brightness / 255) * (chars.length - 1));
-      row += chars[Math.min(chars.length - 1, Math.max(0, charIndex))];
+      if (!inDisc(x, y)) {
+        row += chars[0]; // space
+        continue;
+      }
+      const b = luminanceAt(pixels, cols, x, y);
+      let t = (b - lo) / span;
+      t += asciiSurfaceNoise(x, y) * 0.085;
+      t += Math.sin(x * 0.65 + y * 1.15) * 0.045;
+      t = Math.min(1, Math.max(0, t));
+      const charIndex = Math.floor(t * maxIdx + 1e-6);
+      row += chars[Math.min(maxIdx, Math.max(0, charIndex))]!;
     }
     lines.push(row);
   }
@@ -108,6 +163,7 @@ export async function renderMoonAsciiForPhaseDegrees(
   const rng = mulberry32(0x5f3759df);
 
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
   /** Must match framebuffer pixel aspect (`cols / rows`) so the sphere projects as a circle in `readPixels`. */
   const camera = new THREE.PerspectiveCamera(35, cols / rows, 0.1, 1000);
   camera.position.z = 6;
@@ -121,6 +177,7 @@ export async function renderMoonAsciiForPhaseDegrees(
   });
   renderer.setPixelRatio(1);
   renderer.setSize(cols, rows, false);
+  renderer.setClearColor(0x000000, 1);
 
   const textureCanvas = buildLunarTextureCanvas(rng);
   const texture = new THREE.CanvasTexture(textureCanvas);
@@ -129,16 +186,21 @@ export async function renderMoonAsciiForPhaseDegrees(
   const material = new THREE.MeshStandardMaterial({
     map: texture,
     bumpMap: texture,
-    bumpScale: 0.18,
-    roughness: 1.0,
+    bumpScale: 0.42,
+    roughness: 0.92,
+    /** Lifts shadowed limb / maria so gibbous phases stay readable in coarse ASCII. */
+    emissive: new THREE.Color(0x050507),
+    emissiveIntensity: 0.07,
   });
   const moon = new THREE.Mesh(geometry, material);
   moon.rotation.y = 1.8;
   moon.rotation.x = 0.2;
   scene.add(moon);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.01));
-  const sunLight = new THREE.DirectionalLight(0xffffff, 2.8);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.022));
+  const hemi = new THREE.HemisphereLight(0x8899b0, 0x08080c, 0.09);
+  scene.add(hemi);
+  const sunLight = new THREE.DirectionalLight(0xffffff, 3.15);
   scene.add(sunLight);
 
   const gl = renderer.getContext() as WebGLRenderingContext;

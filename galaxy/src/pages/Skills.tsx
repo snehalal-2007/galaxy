@@ -27,31 +27,29 @@ type SkillSection = SkillSectionRaw & {
 
 const DATA = skillsData as SkillsDataFile;
 
+/** Tight square frame: faint disk + `overflow-hidden` circle so the scaled ASCII limb fills the ring. */
+const MOON_FRAME_CLASS =
+  "relative flex aspect-square w-[min(5.35rem,18.5vw)] shrink-0 items-center justify-center overflow-hidden rounded-full border border-border/35 bg-card/15 shadow-[inset_0_0_24px_hsl(var(--foreground)/0.06)] backdrop-blur-[0.5px]";
+
 function RealisticMoonAsciiBlock({ lines }: { lines: string[] | null }) {
   if (!lines) {
-    return (
-      <div
-        className="inline-block select-none rounded-sm border border-border/40 bg-card/30"
-        style={{
-          width: "min(6.5rem, 22vw)",
-          aspectRatio: "1 / 1",
-        }}
-        aria-hidden="true"
-      />
-    );
+    return <div className={MOON_FRAME_CLASS} aria-hidden="true" />;
   }
 
   return (
-    <pre
-      className="m-0 inline-block select-none text-left font-mono leading-none tracking-normal text-foreground/90"
-      style={{
-        fontSize: "clamp(1.65px, 0.34vw, 2.45px)",
-        textShadow: "0 0 10px hsl(var(--glow-color) / 0.14)",
-      }}
-      aria-hidden="true"
-    >
-      {lines.join("\n")}
-    </pre>
+    <div className={MOON_FRAME_CLASS} aria-hidden="true">
+      <pre
+        className="m-0 inline-block origin-center select-none text-left font-mono leading-none tracking-normal text-foreground/90"
+        style={{
+          fontSize: "clamp(2.55px, 0.58vw, 3.35px)",
+          textShadow: "0 0 10px hsl(var(--glow-color) / 0.14)",
+          /* Upscale to meet the circle edge; extra X corrects monospace cells (tall glyphs → vertical oval). */
+          transform: "scale(1.22, 1.26) scaleX(1.14)",
+        }}
+      >
+        {lines.join("\n")}
+      </pre>
+    </div>
   );
 }
 

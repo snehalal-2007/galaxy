@@ -3,7 +3,7 @@
     {
       "id": "waxing_crescent",
       "label": "Waxing Crescent",
-      "phaseDeg": 52,
+      "phaseDeg": 74,
       "description": "Thin sunlit crescent growing after new moon"
     },
     {
@@ -15,7 +15,7 @@
     {
       "id": "waxing_gibbous",
       "label": "Waxing Gibbous",
-      "phaseDeg": 118,
+      "phaseDeg": 116,
       "description": "More than half lit, still growing toward full"
     },
     {

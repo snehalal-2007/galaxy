@@ -1,97 +1,120 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
-import { generatePhaseMoonRaster, type MoonPhaseKind } from "@/lib/moonPhaseAscii";
+import { renderMoonAsciiForPhaseDegrees } from "@/lib/realisticSkillsMoonAscii";
+import skillsData from "@/data/skills.json";
 
-/** Small grid; full disc + color phase shading. */
-const MOON_ROWS = 16;
-const MOON_COLS = 16;
+/**
+ * ASCII grid size. `cols / rows` ≈ 1.65 so that with monospace cells (~taller than wide)
+ * the lit disc reads closer to circular on screen (wider grids look like horizontal ovals).
+ */
+const MOON_ROWS = 36;
+const MOON_COLS = 60;
 
-type SkillSection = {
-  id: string;
-  title: string;
-  phase: MoonPhaseKind;
-  rotation: number;
-  skills: { label: string }[];
+type SkillItem = { label: string };
+type SkillSectionRaw = { id: string; title: string; skills: SkillItem[] };
+type MoonPhaseEntry = { id: string; label: string; phaseDeg: number; description?: string };
+
+type SkillsDataFile = {
+  moonPhaseCycle: MoonPhaseEntry[];
+  sections: SkillSectionRaw[];
 };
 
-const SECTIONS: SkillSection[] = [
-  {
-    id: "languages",
-    title: "Languages",
-    phase: "crescent",
-    rotation: 0.35,
-    skills: [
-      { label: "Python" },
-      { label: "Java" },
-      { label: "C++ (learning)" },
-      { label: "React" },
-    ],
-  },
-  {
-    id: "database",
-    title: "Database",
-    phase: "opposite",
-    rotation: -0.28,
-    skills: [{ label: "PostgreSQL" }, { label: "Supabase" }],
-  },
-  {
-    id: "misc",
-    title: "Miscellaneous",
-    phase: "half",
-    rotation: 0.12,
-    skills: [{ label: "GitHub" }],
-  },
-];
+type SkillSection = SkillSectionRaw & {
+  phaseDeg: number;
+  phaseLabel: string;
+};
 
-function MoonAsciiBlock({ phase, rotation }: { phase: MoonPhaseKind; rotation: number }) {
-  const raster = useMemo(
-    () => generatePhaseMoonRaster(MOON_ROWS, MOON_COLS, phase, rotation),
-    [phase, rotation]
-  );
+const DATA = skillsData as SkillsDataFile;
+
+function RealisticMoonAsciiBlock({ lines }: { lines: string[] | null }) {
+  if (!lines) {
+    return (
+      <div
+        className="inline-block select-none rounded-sm border border-border/40 bg-card/30"
+        style={{
+          width: "min(6.5rem, 22vw)",
+          aspectRatio: "1 / 1",
+        }}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
-    <div
-      className="inline-block select-none font-mono text-[0.34rem] leading-none sm:text-[0.4rem] md:text-[0.42rem]"
-      style={{ textShadow: "0 0 10px hsl(var(--glow-color) / 0.14)" }}
+    <pre
+      className="m-0 inline-block select-none text-left font-mono leading-none tracking-normal text-foreground/90"
+      style={{
+        fontSize: "clamp(1.65px, 0.34vw, 2.45px)",
+        textShadow: "0 0 10px hsl(var(--glow-color) / 0.14)",
+      }}
       aria-hidden="true"
     >
-      {raster.map((row, yi) => (
-        <div key={yi} className="block whitespace-nowrap">
-          {row.map((cell, xi) => (
-            <span
-              key={xi}
-              className="inline-block w-[1ch] text-center align-top"
-              style={{ color: cell.color }}
-            >
-              {cell.color === "transparent" ? "\u00a0" : cell.ch}
-            </span>
-          ))}
-        </div>
-      ))}
-    </div>
+      {lines.join("\n")}
+    </pre>
   );
 }
 
 const Skills = () => {
+  const sectionsWithPhase = useMemo<SkillSection[]>(() => {
+    const { moonPhaseCycle, sections } = DATA;
+    const n = moonPhaseCycle.length;
+    if (n === 0) return sections.map((s) => ({ ...s, phaseDeg: 180, phaseLabel: "Full Moon" }));
+
+    return sections.map((section, index) => {
+      const phase = moonPhaseCycle[index % n]!;
+      return {
+        ...section,
+        phaseDeg: phase.phaseDeg,
+        phaseLabel: phase.label,
+      };
+    });
+  }, []);
+
+  const [moonLinesById, setMoonLinesById] = useState<Record<string, string[] | null>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    const ids = sectionsWithPhase.map((s) => s.id);
+    const degrees = sectionsWithPhase.map((s) => s.phaseDeg);
+
+    void (async () => {
+      try {
+        const frames = await renderMoonAsciiForPhaseDegrees(degrees, MOON_ROWS, MOON_COLS);
+        if (cancelled) return;
+        const next: Record<string, string[]> = {};
+        ids.forEach((id, i) => {
+          next[id] = frames[i] ?? [];
+        });
+        setMoonLinesById(next);
+      } catch {
+        if (!cancelled) setMoonLinesById({});
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [sectionsWithPhase]);
+
   return (
     <CosmicPageShell>
       <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">
-        <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow text-center mb-8 md:mb-10">
+        <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow mb-8 text-center md:mb-10">
           SKILLS
         </h1>
 
         <div className="space-y-7 md:space-y-8">
-          {SECTIONS.map((section) => (
+          {sectionsWithPhase.map((section) => (
             <section
               key={section.id}
               aria-labelledby={`skills-${section.id}-title`}
-              className="grid grid-cols-1 items-start gap-5 border-b border-border/40 pb-7 last:border-b-0 last:pb-0 md:grid-cols-[minmax(0,132px)_1fr] md:items-center md:gap-6 md:pb-8"
+              className="grid grid-cols-1 items-start gap-5 border-b border-border/40 pb-7 last:border-b-0 last:pb-0 md:grid-cols-[minmax(0,148px)_1fr] md:items-center md:gap-8 md:pb-8"
             >
-              <div className="flex justify-center md:justify-start md:pt-0.5">
-                <MoonAsciiBlock phase={section.phase} rotation={section.rotation} />
+              <div className="flex justify-center md:justify-end md:pt-0.5">
+                <RealisticMoonAsciiBlock lines={moonLinesById[section.id] ?? null} />
               </div>
 
-              <div className="min-w-0">
+              <div className="min-w-0 md:pl-6 lg:pl-10">
                 <h2
                   id={`skills-${section.id}-title`}
                   className="text-foreground text-sm font-bold uppercase tracking-[0.2em] md:text-base"
@@ -99,9 +122,7 @@ const Skills = () => {
                   {section.title}
                 </h2>
                 <p className="mt-0.5 text-[0.6rem] uppercase tracking-[0.18em] text-muted-foreground">
-                  {section.phase === "crescent" && "Crescent"}
-                  {section.phase === "opposite" && "Opposite crescent"}
-                  {section.phase === "half" && "Half moon"}
+                  {section.phaseLabel}
                 </p>
 
                 <ul className="mt-3 flex list-none flex-wrap gap-2 p-0 md:mt-3.5">

@@ -1,0 +1,73 @@
+{
+  "moonPhaseCycle": [
+    {
+      "id": "waxing_crescent",
+      "label": "Waxing Crescent",
+      "phaseDeg": 52,
+      "description": "Thin sunlit crescent growing after new moon"
+    },
+    {
+      "id": "first_quarter",
+      "label": "First Quarter",
+      "phaseDeg": 90,
+      "description": "Half disc lit on the right (northern hemisphere)"
+    },
+    {
+      "id": "waxing_gibbous",
+      "label": "Waxing Gibbous",
+      "phaseDeg": 118,
+      "description": "More than half lit, still growing toward full"
+    },
+    {
+      "id": "full_moon",
+      "label": "Full Moon",
+      "phaseDeg": 180,
+      "description": "Fully illuminated disc"
+    },
+    {
+      "id": "waning_gibbous",
+      "label": "Waning Gibbous",
+      "phaseDeg": 232,
+      "description": "More than half lit on the opposite side, shrinking after full"
+    },
+    {
+      "id": "third_quarter",
+      "label": "Third Quarter",
+      "phaseDeg": 270,
+      "description": "Half disc lit on the left (northern hemisphere)"
+    },
+    {
+      "id": "waning_crescent",
+      "label": "Waning Crescent",
+      "phaseDeg": 308,
+      "description": "Thin crescent before new moon (opposite limb from waxing crescent)"
+    }
+  ],
+  "sections": [
+    {
+      "id": "languages",
+      "title": "Languages",
+      "skills": [
+        { "label": "Python" },
+        { "label": "Java" },
+        { "label": "TypeScript" },
+        { "label": "C++ (learning)" }
+      ]
+    },
+    {
+      "id": "frameworks-ui",
+      "title": "Frameworks & UI",
+      "skills": [{ "label": "React" }, { "label": "HTML/CSS" }, { "label": "TypeScript" }]
+    },
+    {
+      "id": "databases",
+      "title": "Databases & storage",
+      "skills": [{ "label": "PostgreSQL" }, { "label": "Supabase" }]
+    },
+    {
+      "id": "misc",
+      "title": "Miscellaneous",
+      "skills": [{ "label": "GitHub" }, { "label": "VS Code" }, { "label": "Linux basics" }]
+    }
+  ]
+}

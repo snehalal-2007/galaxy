@@ -1,0 +1,29 @@
+{
+  "experiences": [
+    {
+      "title": "Project Developer",
+      "organization": "ACM @University of Texas at Dallas",
+      "timeline": "January 2026 – Present",
+      "description": [
+        "Built and contributed to web-based projects",
+        "Collaborated with team members on development tasks",
+        "Worked with modern tools and APIs"
+      ],
+      "skills": ["Frontend", "Teamwork"]
+    },
+    {
+      "title": "Developer Intern",
+      "organization": "Alpha Coders",
+      "timeline": "July 2025 – September 2025",
+      "description": ["Point1", "Point 2"],
+      "skills": ["Vertex AI", "Google Cloud Platform"]
+    },
+    {
+      "title": "Developer Intern",
+      "organization": "Xceptional Learning",
+      "timeline": "June 2025 – August 2025",
+      "description": ["Point 1", "Point 2"],
+      "skills": ["Python", "Google Cloud Platform", "Google Studio", "GitHub"]
+    }
+  ]
+}

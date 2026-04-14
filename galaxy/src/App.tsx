@@ -8,6 +8,7 @@ import Index from "./pages/Index.tsx";
 import Galaxy from "./pages/Galaxy.tsx";
 import About from "./pages/About.tsx";
 import Skills from "./pages/Skills.tsx";
+import MissionLog from "./pages/MissionLog.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/galaxy" element={<Galaxy />} />
           <Route path="/about" element={<About />} />
           <Route path="/skills" element={<Skills />} />
+          <Route path="/mission-log" element={<MissionLog />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

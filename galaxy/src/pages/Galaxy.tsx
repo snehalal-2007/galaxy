@@ -88,10 +88,15 @@ const Galaxy = () => {
       <Starfield />
 
       {/* Nav */}
-      <div className="fixed top-6 left-6 z-30">
+      <div className="fixed top-6 left-6 z-30 flex flex-wrap gap-2">
         <Link to="/">
           <Button variant="cosmic" size="sm">
             <ArrowLeft className="mr-1 h-3 w-3" /> Home
+          </Button>
+        </Link>
+        <Link to="/about">
+          <Button variant="cosmic" size="sm">
+            About
           </Button>
         </Link>
       </div>

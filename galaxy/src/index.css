@@ -80,3 +80,21 @@
   transform-origin: 50% 45%;
   animation: starfield-subtle-tilt 240s ease-in-out infinite;
 }
+
+@keyframes typewriter-caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.typewriter-caret {
+  margin-left: 0.06em;
+  font-weight: 300;
+  color: hsl(var(--foreground) / 0.75);
+  animation: typewriter-caret 0.85s step-end infinite;
+}

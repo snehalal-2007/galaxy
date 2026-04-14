@@ -21,8 +21,8 @@ function TimelineNode({ className }: { className?: string }) {
       )}
       aria-hidden="true"
     >
-      <span className="mission-log-node-core relative block h-3.5 w-3.5 rounded-full border-2 border-primary/70 bg-card/90" />
-      <span className="mission-log-node-orbit-ring pointer-events-none absolute inset-0 rounded-full border border-dashed border-foreground/20 opacity-60" />
+      <span className="mission-log-node-core relative block h-3.5 w-3.5 rounded-full border-2 border-[rgb(90,110,145)]/85 bg-card/90" />
+      <span className="mission-log-node-orbit-ring pointer-events-none absolute inset-0 rounded-full border border-dashed border-[rgb(75,90,118)]/45 opacity-70" />
     </div>
   );
 }
@@ -30,20 +30,20 @@ function TimelineNode({ className }: { className?: string }) {
 function ExperiencePanel({ exp, side }: { exp: Experience; side: "left" | "right" }) {
   const connector =
     side === "right"
-      ? "after:absolute after:right-0 after:top-8 after:z-0 after:hidden after:h-px after:w-8 after:translate-x-full after:content-[''] after:md:block after:bg-gradient-to-r after:from-primary/45 after:to-transparent"
-      : "after:absolute after:left-0 after:top-8 after:z-0 after:hidden after:h-px after:w-8 after:-translate-x-full after:content-[''] after:md:block after:bg-gradient-to-l after:from-primary/45 after:to-transparent";
+      ? "after:absolute after:right-0 after:top-1/2 after:z-0 after:hidden after:h-px after:w-8 after:-translate-y-1/2 after:translate-x-full after:content-[''] after:md:block after:bg-gradient-to-r after:from-[rgb(72,92,128)]/75 after:to-transparent"
+      : "after:absolute after:left-0 after:top-1/2 after:z-0 after:hidden after:h-px after:w-8 after:-translate-y-1/2 after:-translate-x-full after:content-[''] after:md:block after:bg-gradient-to-l after:from-[rgb(72,92,128)]/75 after:to-transparent";
 
   return (
     <article
       className={cn(
         "group relative w-full max-w-xl rounded-lg border border-border/80 bg-card/45 p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur-sm transition duration-300 ease-out",
         "hover:-translate-y-0.5 hover:scale-[1.02] hover:border-foreground/30 hover:bg-card/65",
-        "hover:shadow-[0_0_28px_hsl(var(--glow-color)/0.18),0_0_60px_hsl(var(--primary)/0.08)]",
+        "hover:shadow-[0_0_24px_rgba(45,62,92,0.22),0_0_48px_rgba(35,50,75,0.1)]",
         connector
       )}
       style={{
         boxShadow:
-          "0 0 24px rgba(100,130,200,0.06), inset 0 0 0 1px rgba(255,255,255,0.04)",
+          "0 0 20px rgba(40,55,80,0.08), inset 0 0 0 1px rgba(255,255,255,0.04)",
       }}
     >
       <header className="space-y-1.5">
@@ -54,7 +54,7 @@ function ExperiencePanel({ exp, side }: { exp: Experience; side: "left" | "right
         <p className="text-muted-foreground text-[0.65rem] uppercase tracking-[0.2em]">{exp.timeline}</p>
       </header>
 
-      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-foreground/90 marker:text-primary/80">
+      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-foreground/90 marker:text-[rgb(95,115,150)]">
         {exp.description.map((line) => (
           <li key={line}>{line}</li>
         ))}
@@ -84,11 +84,11 @@ export function MissionLogTimeline({ experiences }: MissionLogTimelineProps) {
         aria-hidden="true"
         style={{
           backgroundImage: [
-            "radial-gradient(1px 1px at 12% 18%, hsl(var(--foreground) / 0.35), transparent 55%)",
-            "radial-gradient(1px 1px at 72% 42%, hsl(var(--glow-color) / 0.25), transparent 60%)",
-            "radial-gradient(1px 1px at 38% 76%, hsl(var(--foreground) / 0.22), transparent 55%)",
-            "radial-gradient(1px 1px at 88% 12%, hsl(var(--primary) / 0.2), transparent 50%)",
-            "radial-gradient(1px 1px at 54% 58%, hsl(var(--foreground) / 0.18), transparent 50%)",
+            "radial-gradient(1px 1px at 12% 18%, rgba(130,145,170,0.35), transparent 55%)",
+            "radial-gradient(1px 1px at 72% 42%, rgba(70,90,125,0.28), transparent 60%)",
+            "radial-gradient(1px 1px at 38% 76%, rgba(120,135,160,0.22), transparent 55%)",
+            "radial-gradient(1px 1px at 88% 12%, rgba(55,75,105,0.22), transparent 50%)",
+            "radial-gradient(1px 1px at 54% 58%, rgba(100,115,140,0.18), transparent 50%)",
           ].join(", "),
         }}
       />
@@ -97,8 +97,9 @@ export function MissionLogTimeline({ experiences }: MissionLogTimelineProps) {
         className="pointer-events-none absolute bottom-0 left-[11px] top-0 w-px md:left-1/2 md:w-[2px] md:-translate-x-1/2"
         style={{
           background:
-            "linear-gradient(180deg, hsl(var(--glow-color) / 0.05), hsl(var(--glow-color) / 0.35) 45%, hsl(var(--primary) / 0.45) 55%, hsl(var(--glow-color) / 0.35), hsl(var(--glow-color) / 0.05))",
-          boxShadow: "0 0 14px hsl(var(--glow-color) / 0.35), 0 0 28px hsl(var(--primary) / 0.12)",
+            "linear-gradient(180deg, rgba(42,55,78,0.25), rgba(52,68,95,0.75) 35%, rgba(62,82,118,0.92) 50%, rgba(52,68,95,0.75) 65%, rgba(42,55,78,0.25))",
+          boxShadow:
+            "0 0 10px rgba(38,52,78,0.35), 0 0 22px rgba(30,42,62,0.25), inset 0 0 1px rgba(90,110,145,0.15)",
         }}
         aria-hidden="true"
       />
@@ -109,8 +110,11 @@ export function MissionLogTimeline({ experiences }: MissionLogTimelineProps) {
           const side = isLeft ? "right" : "left";
 
           return (
-            <li key={`${exp.title}-${exp.organization}-${index}`} className="relative md:grid md:grid-cols-2 md:gap-10">
-              <TimelineNode className="left-[11px] top-6 -translate-x-1/2 md:left-1/2 md:top-8 md:-translate-x-1/2" />
+            <li
+              key={`${exp.title}-${exp.organization}-${index}`}
+              className="relative md:grid md:grid-cols-2 md:items-center md:gap-10"
+            >
+              <TimelineNode className="left-[11px] top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-1/2 md:top-1/2" />
 
               <div
                 className={cn(

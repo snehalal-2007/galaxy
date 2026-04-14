@@ -5,8 +5,8 @@
       "organization": "ACM @University of Texas at Dallas",
       "timeline": "January 2026 – Present",
       "description": [
-        "Built and contributed to web-based projects",
-        "Collaborated with team members on development tasks",
+        "Developed a chrome extension that sorts your email into tasks, calendar events and other categories.",
+        "Collaborated with team members and worked with the team to improve the extension.",
         "Worked with modern tools and APIs"
       ],
       "skills": ["Frontend", "Teamwork"]
@@ -15,14 +15,19 @@
       "title": "Developer Intern",
       "organization": "Alpha Coders",
       "timeline": "July 2025 – September 2025",
-      "description": ["Point1", "Point 2"],
+      "description": [
+        "Developed AI-powered learning assistants for multiple subjects using Vertex AI.",
+        "Worked with the team to improve the assistants and the application."
+      ],
       "skills": ["Vertex AI", "Google Cloud Platform"]
     },
     {
       "title": "Developer Intern",
       "organization": "Xceptional Learning",
       "timeline": "June 2025 – August 2025",
-      "description": ["Point 1", "Point 2"],
+      "description": [
+        "Developed a platform that helps specific needs students to access therapy and education at home.", 
+        "Implemented the chatbot using Google's Gemini API that is personalized for each student's needs."],
       "skills": ["Python", "Google Cloud Platform", "Google Studio", "GitHub"]
     }
   ]

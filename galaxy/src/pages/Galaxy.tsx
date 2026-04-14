@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import type { ProjectPortfolioEntry } from "@/components/ProjectDetailView";
@@ -29,6 +30,14 @@ function scatterForProject(id: string): { x: number; y: number } {
 
 const PROJECT_SEEDS = portfolioData.projects as ProjectPortfolioEntry[];
 
+type GalaxyStar = {
+  key: string;
+  title: string;
+  x: number;
+  y: number;
+  onSelect: () => void;
+};
+
 const Galaxy = () => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState<string | null>(null);
@@ -39,6 +48,44 @@ const Galaxy = () => {
     () => PROJECT_SEEDS.map((p) => ({ ...p, ...scatterForProject(p.id) })) as Project[],
     []
   );
+
+  const stars = useMemo((): GalaxyStar[] => {
+    const projectStars: GalaxyStar[] = projects.map((p) => ({
+      key: p.id,
+      title: p.title,
+      x: p.x,
+      y: p.y,
+      onSelect: () => navigate(`/galaxy/project/${p.id}`),
+    }));
+    const tagit = projects.find((p) => p.id === "tagit");
+    const solace = projects.find((p) => p.id === "solace");
+    let metaX: number;
+    let metaY: number;
+    if (tagit && solace) {
+      /** Midpoint between Tagit and Solace, nudged right; y above both. */
+      metaX = (tagit.x + solace.x) / 2 + 0.06;
+      metaX = Math.min(0.92, Math.max(0.08, metaX));
+      metaY = Math.min(tagit.y, solace.y) - 0.14;
+      metaY = Math.max(0.1, metaY);
+    } else {
+      const fallback = scatterForProject("portfolio-galaxy-easter-egg");
+      metaX = fallback.x;
+      metaY = fallback.y;
+    }
+    return [
+      ...projectStars,
+      {
+        key: "galaxy-you-are-here",
+        title: "Galaxy",
+        x: metaX,
+        y: metaY,
+        onSelect: () =>
+          toast.message("You're in it", {
+            description: "This portfolio is the galaxy — you're already exploring it.",
+          }),
+      },
+    ];
+  }, [projects, navigate]);
 
   useEffect(() => {
     const update = () => {
@@ -53,9 +100,9 @@ const Galaxy = () => {
   }, []);
 
   const getPos = useCallback(
-    (p: Project) => ({
-      x: p.x * dims.w,
-      y: p.y * dims.h,
+    (x: number, y: number) => ({
+      x: x * dims.w,
+      y: y * dims.h,
     }),
     [dims]
   );
@@ -85,12 +132,12 @@ const Galaxy = () => {
               height: "min(66vh, 560px)",
             }}
           >
-            {projects.map((project) => {
-              const pos = getPos(project);
-              const isHovered = hovered === project.id;
+            {stars.map((star) => {
+              const pos = getPos(star.x, star.y);
+              const isHovered = hovered === star.key;
               return (
                 <button
-                  key={project.id}
+                  key={star.key}
                   type="button"
                   className="absolute flex flex-col items-center group"
                   style={{
@@ -99,9 +146,9 @@ const Galaxy = () => {
                     transform: "translate(-50%, -50%)",
                     zIndex: 2,
                   }}
-                  onMouseEnter={() => setHovered(project.id)}
+                  onMouseEnter={() => setHovered(star.key)}
                   onMouseLeave={() => setHovered(null)}
-                  onClick={() => navigate(`/galaxy/project/${project.id}`)}
+                  onClick={star.onSelect}
                 >
                   <div
                     className="rounded-full transition-all duration-300"
@@ -123,7 +170,7 @@ const Galaxy = () => {
                       textShadow: "0 0 10px rgba(0,0,0,0.8)",
                     }}
                   >
-                    {project.title}
+                    {star.title}
                   </span>
                 </button>
               );

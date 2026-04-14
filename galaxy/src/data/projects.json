@@ -127,6 +127,31 @@
       ],
       "liveUrl": "https://example.com",
       "githubUrl": "https://github.com/lavanyabansal03/invest-grow"
+    },
+    {
+      "id": "tagit",
+      "title": "Tagit",
+      "description": "Tag and organize what matters—photos, notes, or files—with quick filters, smart bundles, and a calm interface that stays out of your way.",
+      "images": [
+        "https://picsum.photos/seed/tagit-a/640/360",
+        "https://picsum.photos/seed/tagit-b/640/360"
+      ],
+      "skills": [
+        {
+          "name": "React",
+          "imageUrl": "https://picsum.photos/seed/tagit-skill-react/120/120"
+        },
+        {
+          "name": "Node.js",
+          "imageUrl": "https://picsum.photos/seed/tagit-skill-node/120/120"
+        },
+        {
+          "name": "PostgreSQL",
+          "imageUrl": "https://picsum.photos/seed/tagit-skill-pg/120/120"
+        }
+      ],
+      "liveUrl": "https://example.com",
+      "githubUrl": "https://github.com/snehalal-2007/TagIt"
     }
   ]
 }

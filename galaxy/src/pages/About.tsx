@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import Starfield from "@/components/Starfield";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { CosmicPageShell } from "@/components/CosmicPageShell";
 import profilePhoto from "@/data/profile.png";
 import profileDescription from "@/data/profile-description.json";
 
@@ -95,27 +92,9 @@ const About = () => {
   const speed = SPEED_STEPS[speedIndex];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
-      <Starfield />
-
-      <div className="fixed top-6 left-6 z-30 flex flex-wrap gap-2">
-        <Link to="/">
-          <Button variant="cosmic" size="sm">
-            <ArrowLeft className="mr-1 h-3 w-3" /> Home
-          </Button>
-        </Link>
-        <Link to="/galaxy">
-          <Button variant="cosmic" size="sm">
-            Galaxy
-          </Button>
-        </Link>
-      </div>
-
+    <CosmicPageShell>
       <div className="relative z-10 mx-auto max-w-5xl px-6 pb-16 pt-24 md:pt-28 md:pb-24">
-        <h1
-          className="text-foreground font-bold uppercase text-glow text-center mb-10 md:mb-14"
-          style={{ letterSpacing: "0.25em", fontSize: "clamp(0.85rem, 2.8vw, 1.35rem)" }}
-        >
+        <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow text-center mb-10 md:mb-14">
           ABOUT THE SELENOPHILE
         </h1>
 
@@ -152,7 +131,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
+    </CosmicPageShell>
   );
 };
 

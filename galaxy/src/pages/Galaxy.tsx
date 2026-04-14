@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { Link } from "react-router-dom";
-import Starfield from "@/components/Starfield";
+import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, ArrowLeft, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from "lucide-react";
 import portfolioData from "@/data/projects.json";
 
 /** Per-skill row with a small visual */
@@ -47,6 +46,14 @@ function scatterForProject(id: string): { x: number; y: number } {
 
 const PROJECT_SEEDS: ProjectSeed[] = portfolioData.projects as ProjectSeed[];
 
+const TELESCOPE_ASCII = `      .--.
+     /    \\
+    | (__) |
+     \\____/
+       ||
+      /||\\
+     / || \\`;
+
 const Galaxy = () => {
   const [selected, setSelected] = useState<Project | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -84,29 +91,10 @@ const Galaxy = () => {
   );
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
-      <Starfield />
-
-      {/* Nav */}
-      <div className="fixed top-6 left-6 z-30 flex flex-wrap gap-2">
-        <Link to="/">
-          <Button variant="cosmic" size="sm">
-            <ArrowLeft className="mr-1 h-3 w-3" /> Home
-          </Button>
-        </Link>
-        <Link to="/about">
-          <Button variant="cosmic" size="sm">
-            About
-          </Button>
-        </Link>
-      </div>
-
+    <CosmicPageShell>
       {/* Title */}
       <div className="relative z-10 pt-8 pb-4 text-center">
-        <h1
-          className="text-foreground font-bold uppercase text-glow"
-          style={{ letterSpacing: "0.4em", fontSize: "clamp(1rem, 3vw, 2rem)" }}
-        >
+        <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow">
           MY GALAXY
         </h1>
         <p className="text-muted-foreground text-xs mt-2" style={{ letterSpacing: "0.2em" }}>
@@ -284,7 +272,15 @@ const Galaxy = () => {
           </div>
         </div>
       )}
-    </div>
+
+      <pre
+        className="pointer-events-none fixed bottom-5 left-5 z-20 select-none font-mono text-[0.6rem] leading-tight text-muted-foreground/60 sm:text-[0.65rem]"
+        style={{ textShadow: "0 0 12px hsl(var(--glow-color) / 0.15)" }}
+        aria-hidden="true"
+      >
+        {TELESCOPE_ASCII}
+      </pre>
+    </CosmicPageShell>
   );
 };
 

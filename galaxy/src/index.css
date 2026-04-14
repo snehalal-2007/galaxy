@@ -53,6 +53,12 @@
   .text-glow {
     text-shadow: 0 0 20px hsl(var(--glow-color) / 0.6), 0 0 40px hsl(var(--glow-color) / 0.3);
   }
+
+  /** Shared hero title: MY GALAXY, About, Skills */
+  .cosmic-page-title {
+    font-size: clamp(1rem, 3vw, 2rem);
+    letter-spacing: 0.4em;
+  }
 }
 
 @keyframes twinkle {

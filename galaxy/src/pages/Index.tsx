@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import Starfield from "@/components/Starfield";
+import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { Button } from "@/components/ui/button";
 
 // ASCII density chars from dark to light
@@ -182,15 +182,8 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background">
-      <div className="pointer-events-none fixed inset-0 -m-[4%] starfield-bg-drift">
-        <Starfield />
-      </div>
-
-      <h1
-        className="relative z-10 text-foreground font-bold uppercase text-glow mb-8 md:mb-12"
-        style={{ letterSpacing: "0.4em", fontSize: "clamp(1.2rem, 4vw, 2.5rem)" }}
-      >
+    <CosmicPageShell showNav={false} className="flex flex-col items-center justify-center">
+      <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow mb-8 md:mb-12">
         MY GALAXY
       </h1>
 
@@ -198,7 +191,7 @@ const Index = () => {
         <MoonCanvas size={moonSize} />
       </div>
 
-      <div className="relative z-10 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+      <div className="relative z-10 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
         <Link to="/galaxy">
           <Button variant="cosmic" size="lg">
             Enter the Galaxy
@@ -209,8 +202,13 @@ const Index = () => {
             About
           </Button>
         </Link>
+        <Link to="/skills">
+          <Button variant="cosmic" size="lg">
+            Skills
+          </Button>
+        </Link>
       </div>
-    </div>
+    </CosmicPageShell>
   );
 };
 

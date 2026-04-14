@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
+import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import profilePhoto from "@/data/profile.png";
 import profileDescription from "@/data/profile-description.json";
 
@@ -93,11 +94,15 @@ const About = () => {
 
   return (
     <CosmicPageShell>
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-16 pt-24 md:pt-28 md:pb-24">
-        <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow text-center mb-10 md:mb-14">
-          ABOUT THE SELENOPHILE
-        </h1>
-
+      <CosmicStickyTitleLayout
+        maxWidth="5xl"
+        contentInnerClassName="pt-6 md:pt-10"
+        title={
+          <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
+            ABOUT THE SELENOPHILE
+          </h1>
+        }
+      >
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 md:items-stretch">
           {/* Left: square box + photo */}
           <div className="mx-auto w-full max-w-sm md:mx-0 md:max-w-none">
@@ -130,7 +135,7 @@ const About = () => {
             </button>
           </div>
         </div>
-      </div>
+      </CosmicStickyTitleLayout>
     </CosmicPageShell>
   );
 };

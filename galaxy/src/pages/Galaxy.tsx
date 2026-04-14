@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
+import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from "lucide-react";
 import portfolioData from "@/data/projects.json";
@@ -85,26 +86,29 @@ const Galaxy = () => {
 
   return (
     <CosmicPageShell>
-      {/* Title */}
-      <div className="relative z-10 pt-8 pb-4 text-center">
-        <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow">
-          MY GALAXY
-        </h1>
-        <p className="text-muted-foreground text-xs mt-2" style={{ letterSpacing: "0.2em" }}>
-          CLICK A STAR TO EXPLORE
-        </p>
-      </div>
-
-      {/* Project stars */}
-      <div
-        ref={containerRef}
-        className="relative z-10 mx-auto"
-        style={{
-          width: "min(90vw, 1000px)",
-          height: "min(70vh, 600px)",
-          marginTop: "2vh",
-        }}
+      <CosmicStickyTitleLayout
+        contentInnerClassName="pt-0 pb-10 md:pb-12"
+        contentMaxWidth="full"
+        headerExtra={
+          <p className="text-muted-foreground text-center text-xs" style={{ letterSpacing: "0.2em" }}>
+            CLICK A STAR TO EXPLORE
+          </p>
+        }
+        title={
+          <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
+            MY GALAXY
+          </h1>
+        }
       >
+        <div className="flex flex-col items-center">
+          <div
+            ref={containerRef}
+            className="relative z-10 mx-auto -mt-1 md:-mt-2"
+            style={{
+              width: "min(90vw, 1000px)",
+              height: "min(66vh, 560px)",
+            }}
+          >
         {projects.map((project) => {
           const pos = getPos(project);
           const isHovered = hovered === project.id;
@@ -148,7 +152,9 @@ const Galaxy = () => {
             </button>
           );
         })}
-      </div>
+          </div>
+        </div>
+      </CosmicStickyTitleLayout>
 
       {selected && (
         <div

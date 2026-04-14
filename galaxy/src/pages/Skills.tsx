@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
+import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import { renderMoonAsciiForPhaseDegrees } from "@/lib/realisticSkillsMoonAscii";
 import skillsData from "@/data/skills.json";
 
@@ -98,11 +99,13 @@ const Skills = () => {
 
   return (
     <CosmicPageShell>
-      <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">
-        <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow mb-8 text-center md:mb-10">
-          SKILLS
-        </h1>
-
+      <CosmicStickyTitleLayout
+        title={
+          <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
+            SKILLS
+          </h1>
+        }
+      >
         <div className="space-y-7 md:space-y-8">
           {sectionsWithPhase.map((section) => (
             <section
@@ -141,7 +144,7 @@ const Skills = () => {
             </section>
           ))}
         </div>
-      </div>
+      </CosmicStickyTitleLayout>
     </CosmicPageShell>
   );
 };

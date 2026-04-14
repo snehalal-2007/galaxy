@@ -4,6 +4,12 @@
       "id": "cosmo",
       "title": "Cosmo",
       "description": "A playful orbit simulator and mission log UI: watch bodies drift, pin events, and share snapshots as tiny postcards from deep space.",
+      "features": [
+        "Interactive orbit simulator with draggable bodies",
+        "Mission log for pinning events and revisiting milestones",
+        "Snapshot postcards you can share from deep space",
+        "Canvas-backed rendering with a calm cosmic UI"
+      ],
       "images": [
         "https://picsum.photos/seed/cosmo-a/640/360",
         "https://picsum.photos/seed/cosmo-b/640/360",
@@ -30,6 +36,12 @@
       "id": "artiscii",
       "title": "Artiscii",
       "description": "Turn photos and vector hints into layered ASCII compositions with palettes, dithering, and export presets for terminals and the web.",
+      "features": [
+        "Photo and vector driven ASCII composition",
+        "Palettes, dithering, and layered export presets",
+        "Terminal and web export workflows",
+        "WebGL preview with a Rust / WASM core"
+      ],
       "images": [
         "https://picsum.photos/seed/artiscii-a/640/360",
         "https://picsum.photos/seed/artiscii-b/640/360"
@@ -55,6 +67,12 @@
       "id": "cooksie",
       "title": "Cooksie",
       "description": "Recipe boxes that behave like playlists: scale servings, swap diets, and auto-build grocery lists from overlapping ingredients.",
+      "features": [
+        "Recipe collections that behave like playlists",
+        "Scale servings and swap diets without losing structure",
+        "Grocery lists built from overlapping ingredients",
+        "Auth and data layer ready for Supabase"
+      ],
       "images": [
         "https://picsum.photos/seed/cooksie-a/640/360",
         "https://picsum.photos/seed/cooksie-b/480/480",
@@ -81,6 +99,12 @@
       "id": "solace",
       "title": "Solace",
       "description": "Gentle breathing sessions and ambient soundscapes with haptics-friendly cues—built for short resets between deep work blocks.",
+      "features": [
+        "Short guided breathing between deep work blocks",
+        "Ambient soundscapes with soft visual timing cues",
+        "Haptics-friendly patterns without harsh alarms",
+        "Session presets you can start in one tap"
+      ],
       "images": [
         "https://picsum.photos/seed/solace-a/640/360",
         "https://picsum.photos/seed/solace-b/640/360"
@@ -106,6 +130,12 @@
       "id": "fintor",
       "title": "Fintor",
       "description": "A read-only portfolio dashboard that stitches broker CSVs into clean allocation charts, tax lots, and dividend calendars.",
+      "features": [
+        "Import broker CSVs into one normalized ledger",
+        "Allocation charts with clear sector and holding views",
+        "Tax lots and dividend calendars for planning",
+        "Read-only dashboard so experimentation stays safe"
+      ],
       "images": [
         "https://picsum.photos/seed/fintor-a/640/360",
         "https://picsum.photos/seed/fintor-b/640/360",
@@ -132,6 +162,12 @@
       "id": "tagit",
       "title": "Tagit",
       "description": "Tag and organize what matters—photos, notes, or files—with quick filters, smart bundles, and a calm interface that stays out of your way.",
+      "features": [
+        "Tag-driven organization across photos, notes, and files",
+        "Fast filters and smart bundles for common views",
+        "Calm interface that stays out of your way",
+        "Full-stack flows with durable PostgreSQL storage"
+      ],
       "images": [
         "https://picsum.photos/seed/tagit-a/640/360",
         "https://picsum.photos/seed/tagit-b/640/360"

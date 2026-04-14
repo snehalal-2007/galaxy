@@ -9,6 +9,7 @@ import Galaxy from "./pages/Galaxy.tsx";
 import About from "./pages/About.tsx";
 import Skills from "./pages/Skills.tsx";
 import MissionLog from "./pages/MissionLog.tsx";
+import GalaxyProjectDetail from "./pages/GalaxyProjectDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
         <PersistentStarfield />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/galaxy/project/:projectId" element={<GalaxyProjectDetail />} />
           <Route path="/galaxy" element={<Galaxy />} />
           <Route path="/about" element={<About />} />
           <Route path="/skills" element={<Skills />} />

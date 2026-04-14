@@ -21,8 +21,20 @@ function TimelineNode({ className }: { className?: string }) {
       )}
       aria-hidden="true"
     >
-      <span className="mission-log-node-core relative block h-3.5 w-3.5 rounded-full border-2 border-[rgb(90,110,145)]/85 bg-card/90" />
-      <span className="mission-log-node-orbit-ring pointer-events-none absolute inset-0 rounded-full border border-dashed border-[rgb(75,90,118)]/45 opacity-70" />
+      <span
+        className={cn(
+          "mission-log-node-core relative block h-3.5 w-3.5 rounded-full border-2 border-[rgb(90,110,145)]/85 bg-card/90 transition duration-300 ease-out",
+          "group-hover/experience-row:animate-none group-hover/experience-row:scale-110",
+          "group-hover/experience-row:border-[rgb(150,175,215)] group-hover/experience-row:bg-card",
+          "group-hover/experience-row:shadow-[0_0_12px_rgba(110,145,200,0.65),0_0_28px_rgba(70,100,155,0.45)]"
+        )}
+      />
+      <span
+        className={cn(
+          "mission-log-node-orbit-ring pointer-events-none absolute inset-0 rounded-full border border-dashed border-[rgb(75,90,118)]/45 opacity-70 transition duration-300",
+          "group-hover/experience-row:border-[rgb(130,155,195)]/70 group-hover/experience-row:opacity-100"
+        )}
+      />
     </div>
   );
 }
@@ -36,7 +48,7 @@ function ExperiencePanel({ exp, side }: { exp: Experience; side: "left" | "right
   return (
     <article
       className={cn(
-        "group relative w-full max-w-xl rounded-lg border border-border/80 bg-card/45 p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur-sm transition duration-300 ease-out",
+        "group/card relative w-full max-w-xl rounded-lg border border-border/80 bg-card/45 p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur-sm transition duration-300 ease-out",
         "hover:-translate-y-0.5 hover:scale-[1.02] hover:border-foreground/30 hover:bg-card/65",
         "hover:shadow-[0_0_24px_rgba(45,62,92,0.22),0_0_48px_rgba(35,50,75,0.1)]",
         connector
@@ -64,7 +76,7 @@ function ExperiencePanel({ exp, side }: { exp: Experience; side: "left" | "right
         {exp.skills.map((skill) => (
           <li key={skill}>
             <span
-              className="inline-block border border-border/80 bg-background/35 px-3 py-1.5 text-xs tracking-wide text-foreground backdrop-blur-sm transition group-hover:border-foreground/35 group-hover:bg-background/50"
+              className="inline-block border border-border/80 bg-background/35 px-3 py-1.5 text-xs tracking-wide text-foreground backdrop-blur-sm transition group-hover/card:border-foreground/35 group-hover/card:bg-background/50"
               style={{ letterSpacing: "0.06em" }}
             >
               {skill}
@@ -112,7 +124,7 @@ export function MissionLogTimeline({ experiences }: MissionLogTimelineProps) {
           return (
             <li
               key={`${exp.title}-${exp.organization}-${index}`}
-              className="relative md:grid md:grid-cols-2 md:items-center md:gap-10"
+              className="group/experience-row relative md:grid md:grid-cols-2 md:items-center md:gap-10"
             >
               <TimelineNode className="left-[11px] top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-1/2 md:top-1/2" />
 

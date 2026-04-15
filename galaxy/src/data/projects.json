@@ -49,7 +49,8 @@
       "description": "Converts your pantry ingredients into recipes of your choice.",
       "features": [
         "Converts your pantry ingredients into recipes of your choice.",
-        "User gets to choose the meal type and cuisine."
+        "User gets to choose the meal type and cuisine.",
+        "User can upload an image of the ingredients and the recipe will be generated based on the image."
       ],
       "images": [
         "https://picsum.photos/seed/cooksie-a/640/360",

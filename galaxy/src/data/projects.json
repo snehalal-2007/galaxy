@@ -6,14 +6,21 @@
       "description": "A playful orbit simulator and mission log UI.",
       "features": [
         "Interactive orbit simulator with draggable bodies",
-        "Canvas-backed rendering with a calm cosmic UI"
+        "Canvas-backed rendering with a calm cosmic UI",
+        "Constellation mode to view the constellations and the planets in the solar system"
       ],
       "images": [
         "https://picsum.photos/seed/cosmo-a/640/360",
         "https://picsum.photos/seed/cosmo-b/640/360",
         "https://picsum.photos/seed/cosmo-c/480/480"
       ],
-      "skills": [{ "name": "React" }, { "name": "TypeScript" }, { "name": "Canvas" }],
+      "skills": [
+        { "name": "React" },
+        { "name": "TypeScript" }, 
+        { "name": "Tailwind CSS" }, 
+        { "name": "Canvas" }, 
+        { "name": "Framer Motion" }
+      ],
       "liveUrl": "https://example.com",
       "githubUrl": "https://github.com/snehalal-2007/Cosmo"
     },

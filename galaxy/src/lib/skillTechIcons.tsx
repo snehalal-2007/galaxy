@@ -52,7 +52,7 @@ const SKILL_ICONS: Record<string, Entry> = {
   Expo: { Icon: SiExpo, color: "#4630eb" },
   Reanimated: { Icon: SiReact, color: "#fa8d28" },
   "Audio API": { Icon: FaVolumeHigh, color: "#c4b5fd" },
-  Finnhub: { Icon: SiChartdotjs, color: "#ff6384" },
+  Finnhub: { Icon: SiChartdotjs, color: "#3cad55" },
   "Google Finance": { Icon: SiGoogle, color: "#4285F4" },
   MongoDB: { Icon: SiMongodb, color: "#47a248" },
   "Gemini API": { Icon: SiGooglegemini, color: "#8e75ff" },

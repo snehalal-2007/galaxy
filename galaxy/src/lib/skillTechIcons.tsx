@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import { FaJava } from "react-icons/fa";
-import { FaVolumeHigh } from "react-icons/fa6";
+import { FaUsers, FaVolumeHigh } from "react-icons/fa6";
 import {
   SiChartdotjs,
   SiCplusplus,
@@ -60,6 +60,11 @@ const SKILL_ICONS: Record<string, Entry> = {
   MongoDB: { Icon: SiMongodb, color: "#47a248" },
   "Gemini API": { Icon: SiGooglegemini, color: "#8e75ff" },
   "Google Cloud Platform": { Icon: SiGooglecloud, color: "#4285F4" },
+  /** Experience / mission log tech labels (`experiences.json`) */
+  Frontend: { Icon: SiReact, color: "#61dafb" },
+  Teamwork: { Icon: FaUsers, color: "hsl(var(--muted-foreground))" },
+  "Vertex AI": { Icon: SiGooglecloud, color: "#8ab4f8" },
+  "Google Studio": { Icon: SiGooglegemini, color: "#8e75ff" },
 };
 
 /** Renders brand icons for known `skills.json` and project tech labels. */

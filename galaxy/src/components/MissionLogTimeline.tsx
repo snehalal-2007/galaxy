@@ -1,3 +1,4 @@
+import { SkillTechIcon } from "@/lib/skillTechIcons";
 import { cn } from "@/lib/utils";
 
 export type Experience = {
@@ -76,10 +77,11 @@ function ExperiencePanel({ exp, side }: { exp: Experience; side: "left" | "right
         {exp.skills.map((skill) => (
           <li key={skill}>
             <span
-              className="inline-block border border-border/80 bg-background/35 px-3 py-1.5 text-xs tracking-wide text-foreground backdrop-blur-sm transition group-hover/card:border-foreground/35 group-hover/card:bg-background/50"
+              className="inline-flex items-center gap-2 border border-border/80 bg-card/50 px-2.5 py-1.5 text-xs tracking-wide text-foreground backdrop-blur-sm transition group-hover/card:border-foreground/35 group-hover/card:bg-card/70 md:px-3"
               style={{ letterSpacing: "0.06em" }}
             >
-              {skill}
+              <SkillTechIcon label={skill} />
+              <span className="min-w-0 font-medium">{skill}</span>
             </span>
           </li>
         ))}

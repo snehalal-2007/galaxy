@@ -3,11 +3,9 @@
     {
       "id": "cosmo",
       "title": "Cosmo",
-      "description": "A playful orbit simulator and mission log UI: watch bodies drift, pin events, and share snapshots as tiny postcards from deep space.",
+      "description": "A playful orbit simulator and mission log UI.",
       "features": [
         "Interactive orbit simulator with draggable bodies",
-        "Mission log for pinning events and revisiting milestones",
-        "Snapshot postcards you can share from deep space",
         "Canvas-backed rendering with a calm cosmic UI"
       ],
       "images": [
@@ -15,46 +13,25 @@
         "https://picsum.photos/seed/cosmo-b/640/360",
         "https://picsum.photos/seed/cosmo-c/480/480"
       ],
-      "skills": [
-        {
-          "name": "React",
-          "imageUrl": "https://picsum.photos/seed/cosmo-skill-react/120/120"
-        },
-        {
-          "name": "TypeScript",
-          "imageUrl": "https://picsum.photos/seed/cosmo-skill-ts/120/120"
-        },
-        {
-          "name": "Canvas",
-          "imageUrl": "https://picsum.photos/seed/cosmo-skill-canvas/120/120"
-        }
-      ],
+      "skills": [{ "name": "React" }, { "name": "TypeScript" }, { "name": "Canvas" }],
       "liveUrl": "https://example.com",
       "githubUrl": "https://github.com/snehalal-2007/Cosmo"
     },
     {
       "id": "artiscii",
       "title": "Artiscii",
-      "description": "Turn photos and vector hints into layered ASCII compositions with palettes, dithering, and export presets for terminals and the web.",
+      "description": "Turn photos and vector hints into layered ASCII compositions.",
       "features": [
         "Photo and vector driven ASCII composition",
-        "Palettes, dithering, and layered export presets",
-        "Terminal and web export workflows",
-        "WebGL preview with a Rust / WASM core"
+        "Palettes, dithering, and layered export presets"
       ],
       "images": [
         "https://picsum.photos/seed/artiscii-a/640/360",
         "https://picsum.photos/seed/artiscii-b/640/360"
       ],
       "skills": [
-        {
-          "name": "WebGL",
-          "imageUrl": "https://picsum.photos/seed/artiscii-skill-gl/120/120"
-        },
-        {
-          "name": "JavaScript",
-          "imageUrl": "https://picsum.photos/seed/artiscii-skill-rust/120/120"
-        }
+        { "name": "WebGL" }, 
+        { "name": "JavaScript" }
       ],
       "liveUrl": "https://example.com",
       "githubUrl": "https://github.com/snehalal-2007/artiscii"
@@ -62,12 +39,10 @@
     {
       "id": "cooksie",
       "title": "Cooksie",
-      "description": "Recipe boxes that behave like playlists: scale servings, swap diets, and auto-build grocery lists from overlapping ingredients.",
+      "description": "Converts your pantry ingredients into recipes of your choice.",
       "features": [
-        "Recipe collections that behave like playlists",
-        "Scale servings and swap diets without losing structure",
-        "Grocery lists built from overlapping ingredients",
-        "Auth and data layer ready for Supabase"
+        "Converts your pantry ingredients into recipes of your choice.",
+        "User gets to choose the meal type and cuisine."
       ],
       "images": [
         "https://picsum.photos/seed/cooksie-a/640/360",
@@ -77,20 +52,11 @@
         "https://picsum.photos/seed/cooksie-c/640/360"
       ],
       "skills": [
-        {
-          "name": "Next.js",
-          "imageUrl": "https://picsum.photos/seed/cooksie-skill-next/120/120"
-        },
-        {
-          "name": "Supabase",
-          "imageUrl": "https://picsum.photos/seed/cooksie-skill-sb/120/120"
-        },
-        {
-          "name": "Tailwind",
-          "imageUrl": "https://picsum.photos/seed/cooksie-skill-tw/120/120"
-        }
+        { "name": "Gemini API" }, 
+        { "name": "React" }, 
+        { "name": "Python" }
       ],
-      "liveUrl": "https://example.com",
+      "liveUrl": "",
       "githubUrl": "https://github.com/snehalal-2007/Cooksie"
     },
     {
@@ -99,29 +65,19 @@
       "description": "A travel guide app that helps users plan their trips for them.",
       "features": [
         "Gemini API to generate travel plans.",
-        "Ambient soundscapes with soft visual timing cues",
-        "Haptics-friendly patterns without harsh alarms",
-        "Session presets you can start in one tap"
+        "Provides a list of places to visit and things to do in the city.",
+        "Give constraints like the parking spot availability, the time of the day, the weather, etc."
       ],
       "images": [
         "https://picsum.photos/seed/solace-a/640/360",
         "https://picsum.photos/seed/solace-b/640/360"
       ],
       "skills": [
-        {
-          "name": "Expo",
-          "imageUrl": "https://picsum.photos/seed/solace-skill-expo/120/120"
-        },
-        {
-          "name": "Reanimated",
-          "imageUrl": "https://picsum.photos/seed/solace-skill-rean/120/120"
-        },
-        {
-          "name": "Audio API",
-          "imageUrl": "https://picsum.photos/seed/solace-skill-audio/120/120"
-        }
+        { "name": "Gemini API" }, 
+        { "name": "React" }, 
+        { "name": "Python" }
       ],
-      "liveUrl": "https://example.com",
+      "liveUrl": "",
       "githubUrl": "https://github.com/snehalal-2007/Solace"
     },
     {
@@ -131,6 +87,7 @@
       "features": [
         "Stock market prices in real time using Finnhub API.",
         "Supabase for database and authentication.",
+        "Portfolio where user can see the stocks they have invested in and the performance of the stocks.",
         "Leaderboard and rewards system to motivate users to invest."
       ],
       "images": [
@@ -139,26 +96,12 @@
         "https://picsum.photos/seed/fintor-c/480/480"
       ],
       "skills": [
-        {
-          "name": "Python",
-          "imageUrl": "https://picsum.photos/seed/fintor-skill-py/120/120"
-        },
-        {
-          "name": "Finnhub",
-          "imageUrl": "https://picsum.photos/seed/fintor-skill-duck/120/120"
-        },
-        {
-          "name": "React",
-          "imageUrl": "https://picsum.photos/seed/fintor-skill-d3/120/120"
-        },
-        {
-          "name": "Google Finance",
-          "imageUrl": "https://picsum.photos/seed/fintor-skill-d3/120/120"
-        },
-        {
-          "name": "React",
-          "imageUrl": "https://picsum.photos/seed/fintor-skill-d3/120/120"
-        }
+        { "name": "Python" },
+        { "name": "Gemini API" },
+        { "name": "Finnhub" },
+        { "name": "React" },
+        { "name": "Google Finance" },
+        { "name": "React" }
       ],
       "liveUrl": "https://example.com",
       "githubUrl": "https://github.com/lavanyabansal03/invest-grow"
@@ -178,29 +121,14 @@
         "https://picsum.photos/seed/tagit-b/640/360"
       ],
       "skills": [
-        {
-          "name": "React",
-          "imageUrl": "https://picsum.photos/seed/tagit-skill-react/120/120"
-        },
-        {
-          "name": "MongoDB",
-          "imageUrl": "https://picsum.photos/seed/tagit-skill-node/120/120"
-        },
-        {
-          "name": "Gemini API",
-          "imageUrl": "https://picsum.photos/seed/tagit-skill-pg/120/120"
-        },
-        {
-          "name": "Python",
-          "imageUrl": "https://picsum.photos/seed/tagit-skill-pg/120/120"
-        },
-        {
-          "name": "Google Cloud Platform",
-          "imageUrl": "https://picsum.photos/seed/tagit-skill-pg/120/120"
-        }
+        { "name": "React" },
+        { "name": "MongoDB" },
+        { "name": "Gemini API" },
+        { "name": "Python" },
+        { "name": "Google Cloud Platform" }
       ],
       "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com/snehalal-2007/TagIt"
+      "githubUrl": "https://github.com/acm-projects/TagIt"
     }
   ]
 }

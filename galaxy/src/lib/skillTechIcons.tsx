@@ -1,16 +1,27 @@
 import type { IconType } from "react-icons";
 import { FaJava } from "react-icons/fa";
+import { FaVolumeHigh } from "react-icons/fa6";
 import {
+  SiChartdotjs,
   SiCplusplus,
   SiCss,
+  SiExpo,
   SiGithub,
+  SiGoogle,
+  SiGooglecloud,
+  SiGooglegemini,
   SiHtml5,
+  SiJavascript,
   SiLinux,
+  SiMongodb,
+  SiNextdotjs,
   SiPostgresql,
   SiPython,
   SiReact,
   SiSupabase,
+  SiTailwindcss,
   SiTypescript,
+  SiWebgl,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -32,9 +43,23 @@ const SKILL_ICONS: Record<string, Entry> = {
   GitHub: { Icon: SiGithub, color: "hsl(var(--foreground))" },
   "VS Code": { Icon: VscVscode, color: "#22a7f2" },
   "Linux basics": { Icon: SiLinux, color: "#fcc624" },
+  /** Project tech labels (`projects.json`) */
+  Canvas: { Icon: SiHtml5, color: "#e34f26" },
+  WebGL: { Icon: SiWebgl, color: "#990000" },
+  JavaScript: { Icon: SiJavascript, color: "#f7df1e" },
+  "Next.js": { Icon: SiNextdotjs, color: "hsl(var(--foreground))" },
+  Tailwind: { Icon: SiTailwindcss, color: "#06b6d4" },
+  Expo: { Icon: SiExpo, color: "#4630eb" },
+  Reanimated: { Icon: SiReact, color: "#fa8d28" },
+  "Audio API": { Icon: FaVolumeHigh, color: "#c4b5fd" },
+  Finnhub: { Icon: SiChartdotjs, color: "#ff6384" },
+  "Google Finance": { Icon: SiGoogle, color: "#4285F4" },
+  MongoDB: { Icon: SiMongodb, color: "#47a248" },
+  "Gemini API": { Icon: SiGooglegemini, color: "#8e75ff" },
+  "Google Cloud Platform": { Icon: SiGooglecloud, color: "#4285F4" },
 };
 
-/** Renders brand icons for known `skills.json` labels (Simple Icons, Font Awesome Java, VS Code). */
+/** Renders brand icons for known `skills.json` and project tech labels. */
 export function SkillTechIcon({ label }: { label: string }) {
   const entry = SKILL_ICONS[label];
   if (!entry) return null;

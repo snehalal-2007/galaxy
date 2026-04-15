@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
+import { SkillTechIcon } from "@/lib/skillTechIcons";
 import { cn } from "@/lib/utils";
 
-export type ProjectSkill = { name: string; imageUrl: string };
+export type ProjectSkill = { name: string };
 
 export type ProjectPortfolioEntry = {
   id: string;
@@ -215,13 +216,14 @@ export function ProjectDetailView({ project }: { project: ProjectPortfolioEntry 
             </h3>
             {project.skills.length > 0 ? (
               <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-                {project.skills.map((skill) => (
-                  <li key={skill.name}>
+                {project.skills.map((skill, index) => (
+                  <li key={`${project.id}-${skill.name}-${index}`}>
                     <span
-                      className="inline-block border border-border/80 bg-background/35 px-3 py-1.5 text-xs font-medium tracking-wide text-foreground backdrop-blur-sm"
+                      className="inline-flex items-center gap-2 border border-border/80 bg-card/50 px-2.5 py-1.5 text-xs tracking-wide text-foreground backdrop-blur-sm transition hover:border-foreground/35 hover:bg-card/70 md:px-3"
                       style={{ letterSpacing: "0.06em" }}
                     >
-                      {skill.name}
+                      <SkillTechIcon label={skill.name} />
+                      <span className="min-w-0 font-medium">{skill.name}</span>
                     </span>
                   </li>
                 ))}

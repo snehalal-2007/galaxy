@@ -59,9 +59,11 @@
         "https://picsum.photos/seed/cooksie-c/640/360"
       ],
       "skills": [
+        { "name": "Python" },
         { "name": "Gemini API" }, 
-        { "name": "React" }, 
-        { "name": "Python" }
+        { "name": "HTML" }, 
+        { "name": "CSS" }, 
+        { "name": "JavaScript" }
       ],
       "liveUrl": "",
       "githubUrl": "https://github.com/snehalal-2007/Cooksie"

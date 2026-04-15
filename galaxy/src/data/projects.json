@@ -154,6 +154,10 @@
         {
           "name": "Google Finance",
           "imageUrl": "https://picsum.photos/seed/fintor-skill-d3/120/120"
+        },
+        {
+          "name": "React",
+          "imageUrl": "https://picsum.photos/seed/fintor-skill-d3/120/120"
         }
       ],
       "liveUrl": "https://example.com",
@@ -166,7 +170,8 @@
       "features": [
         "Categorize emails into tasks, calendar events and other categories.",
         "Personalized to the user preferences and priorities.",
-        "Uses the Gmail API to get the emails and the Google Calendar API to get the calendar events."
+        "Uses the Gmail API to get the emails and the Google Calendar API to get the calendar events.",
+        "Works for both Gmail and Outlook emails."
       ],
       "images": [
         "https://picsum.photos/seed/tagit-a/640/360",
@@ -178,11 +183,19 @@
           "imageUrl": "https://picsum.photos/seed/tagit-skill-react/120/120"
         },
         {
-          "name": "Node.js",
+          "name": "MongoDB",
           "imageUrl": "https://picsum.photos/seed/tagit-skill-node/120/120"
         },
         {
-          "name": "PostgreSQL",
+          "name": "Gemini API",
+          "imageUrl": "https://picsum.photos/seed/tagit-skill-pg/120/120"
+        },
+        {
+          "name": "Python",
+          "imageUrl": "https://picsum.photos/seed/tagit-skill-pg/120/120"
+        },
+        {
+          "name": "Google Cloud Platform",
           "imageUrl": "https://picsum.photos/seed/tagit-skill-pg/120/120"
         }
       ],

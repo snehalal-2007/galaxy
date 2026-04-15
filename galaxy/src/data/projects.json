@@ -100,8 +100,7 @@
         { "name": "Gemini API" },
         { "name": "Finnhub" },
         { "name": "React" },
-        { "name": "Google Finance" },
-        { "name": "React" }
+        { "name": "Google Finance" }
       ],
       "liveUrl": "https://example.com",
       "githubUrl": "https://github.com/lavanyabansal03/invest-grow"

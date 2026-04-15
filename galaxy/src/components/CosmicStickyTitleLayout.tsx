@@ -22,6 +22,11 @@ type CosmicStickyTitleLayoutProps = {
   mainClassName?: string;
   /** Merged onto the inner wrapper around `children` (padding / spacing below the title). */
   contentInnerClassName?: string;
+  /**
+   * When true, the block is at least one viewport tall and grows with content; use inside a
+   * parent vertical scroll (e.g. stacked “journey” on About) instead of locking to `100dvh`.
+   */
+  documentSection?: boolean;
 };
 
 /**
@@ -36,12 +41,20 @@ export function CosmicStickyTitleLayout({
   headerExtra,
   mainClassName,
   contentInnerClassName,
+  documentSection = false,
 }: CosmicStickyTitleLayoutProps) {
   const headerMw = maxW[maxWidth];
   const bodyMw = maxW[contentMaxWidth ?? maxWidth];
 
   return (
-    <div className="flex h-[100dvh] max-h-[100dvh] flex-col overflow-hidden">
+    <div
+      className={cn(
+        "flex flex-col",
+        documentSection
+          ? "min-h-[100dvh]"
+          : "h-[100dvh] max-h-[100dvh] overflow-hidden"
+      )}
+    >
       <header className="relative z-20 shrink-0 border-b border-border/30 bg-background/50 backdrop-blur-md">
         <div
           className={cn(
@@ -64,7 +77,10 @@ export function CosmicStickyTitleLayout({
       </header>
       <main
         className={cn(
-          "relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-y-contain",
+          "relative z-10 min-h-0 flex-1",
+          documentSection
+            ? "flex flex-col overflow-visible"
+            : "overflow-y-auto overscroll-y-contain",
           mainClassName
         )}
       >

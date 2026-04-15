@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import profilePhoto from "@/data/profile.png";
 import profileDescription from "@/data/profile-description.json";
@@ -160,58 +159,57 @@ function TypewriterBio({
   );
 }
 
-const About = () => {
+/** About band inside `PortfolioJourneyLayout` (not a standalone route). */
+export function AboutJourneySection() {
   const [speedIndex, setSpeedIndex] = useState(0);
   const speed = SPEED_STEPS[speedIndex];
 
   return (
-    <CosmicPageShell>
-      <CosmicStickyTitleLayout
-        maxWidth="5xl"
-        contentInnerClassName="pt-6 md:pt-10"
-        title={
-          <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow text-balance leading-snug max-md:!tracking-[0.22em]">
-            ABOUT THE SELENOPHILE
-          </h1>
-        }
-      >
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-12 md:gap-y-4 md:items-stretch">
-          {/* Left: square box + photo */}
-          <div className="mx-auto w-full max-w-sm md:mx-0 md:max-w-none">
-            <div
-              className="aspect-square w-full overflow-hidden rounded-lg border border-border bg-card/40"
-              style={{
-                boxShadow:
-                  "0 0 40px rgba(100,130,200,0.08), inset 0 0 0 1px rgba(255,255,255,0.04)",
-              }}
-            >
-              <img
-                src={profilePhoto}
-                alt="Portrait"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
+    <CosmicStickyTitleLayout
+      documentSection
+      maxWidth="5xl"
+      contentInnerClassName="pt-6 md:pt-10"
+      title={
+        <h1
+          id="about-heading"
+          className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow text-balance leading-snug max-md:!tracking-[0.22em]"
+        >
+          ABOUT THE SELENOPHILE
+        </h1>
+      }
+    >
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-12 md:gap-y-4 md:items-stretch">
+        <div className="mx-auto w-full max-w-sm md:mx-0 md:max-w-none">
+          <div
+            className="aspect-square w-full overflow-hidden rounded-lg border border-border bg-card/40"
+            style={{
+              boxShadow:
+                "0 0 40px rgba(100,130,200,0.08), inset 0 0 0 1px rgba(255,255,255,0.04)",
+            }}
+          >
+            <img
+              src={profilePhoto}
+              alt="Portrait"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
           </div>
-
-          {/* Right: description rectangle */}
-          <div className="relative flex min-h-[min(100%,22rem)] flex-1 rounded-lg border border-border bg-card/50 p-6 backdrop-blur-sm md:min-h-[min(70vh,28rem)] md:p-8">
-            <TypewriterBio text={ABOUT_TYPEWRITER_TEXT} speedMultiplier={speed.mult} />
-            <button
-              type="button"
-              onClick={() => setSpeedIndex((i) => (i + 1) % SPEED_STEPS.length)}
-              className="absolute bottom-4 right-4 border border-foreground/25 bg-background/70 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:border-foreground/45 hover:bg-background/90"
-              aria-label={`Typing speed ${speed.label}. Click to cycle speed.`}
-            >
-              {speed.label}
-            </button>
-          </div>
-
-          <AboutSocialRow />
         </div>
-      </CosmicStickyTitleLayout>
-    </CosmicPageShell>
-  );
-};
 
-export default About;
+        <div className="relative flex min-h-[min(100%,22rem)] flex-1 rounded-lg border border-border bg-card/50 p-6 backdrop-blur-sm md:min-h-[min(70vh,28rem)] md:p-8">
+          <TypewriterBio text={ABOUT_TYPEWRITER_TEXT} speedMultiplier={speed.mult} />
+          <button
+            type="button"
+            onClick={() => setSpeedIndex((i) => (i + 1) % SPEED_STEPS.length)}
+            className="absolute bottom-4 right-4 border border-foreground/25 bg-background/70 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:border-foreground/45 hover:bg-background/90"
+            aria-label={`Typing speed ${speed.label}. Click to cycle speed.`}
+          >
+            {speed.label}
+          </button>
+        </div>
+
+        <AboutSocialRow />
+      </div>
+    </CosmicStickyTitleLayout>
+  );
+}

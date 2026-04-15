@@ -38,7 +38,9 @@ type GalaxyStar = {
   onSelect: () => void;
 };
 
-const Galaxy = () => {
+type GalaxyProps = { embed?: boolean };
+
+const Galaxy = ({ embed = false }: GalaxyProps) => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -107,9 +109,10 @@ const Galaxy = () => {
     [dims]
   );
 
-  return (
-    <CosmicPageShell>
+  const body = (
+    <>
       <CosmicStickyTitleLayout
+        documentSection={embed}
         contentInnerClassName="pt-0 pb-10 md:pb-12"
         contentMaxWidth="full"
         headerExtra={
@@ -186,8 +189,11 @@ const Galaxy = () => {
       >
         {galaxyTelescopeAscii.trimEnd()}
       </pre>
-    </CosmicPageShell>
+    </>
   );
+
+  if (embed) return body;
+  return <CosmicPageShell>{body}</CosmicPageShell>;
 };
 
 export default Galaxy;

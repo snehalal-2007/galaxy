@@ -54,7 +54,9 @@ function RealisticMoonAsciiBlock({ lines }: { lines: string[] | null }) {
   );
 }
 
-const Skills = () => {
+type SkillsProps = { /** Render without `CosmicPageShell` for the About-page scroll journey. */ embed?: boolean };
+
+const Skills = ({ embed = false }: SkillsProps) => {
   const sectionsWithPhase = useMemo<SkillSection[]>(() => {
     const { moonPhaseCycle, sections } = DATA;
     const n = moonPhaseCycle.length;
@@ -96,9 +98,9 @@ const Skills = () => {
     };
   }, [sectionsWithPhase]);
 
-  return (
-    <CosmicPageShell>
-      <CosmicStickyTitleLayout
+  const body = (
+    <CosmicStickyTitleLayout
+        documentSection={embed}
         title={
           <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
             SKILLS
@@ -145,8 +147,10 @@ const Skills = () => {
           ))}
         </div>
       </CosmicStickyTitleLayout>
-    </CosmicPageShell>
   );
+
+  if (embed) return body;
+  return <CosmicPageShell>{body}</CosmicPageShell>;
 };
 
 export default Skills;

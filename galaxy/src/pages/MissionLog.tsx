@@ -5,20 +5,24 @@ import experiencesData from "@/data/experiences.json";
 
 const experiences = experiencesData.experiences as Experience[];
 
-const MissionLog = () => {
-  return (
-    <CosmicPageShell>
-      <CosmicStickyTitleLayout
-        title={
-          <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
-            MISSION LOG
-          </h1>
-        }
-      >
-        <MissionLogTimeline experiences={experiences} />
-      </CosmicStickyTitleLayout>
-    </CosmicPageShell>
+type MissionLogProps = { embed?: boolean };
+
+const MissionLog = ({ embed = false }: MissionLogProps) => {
+  const body = (
+    <CosmicStickyTitleLayout
+      documentSection={embed}
+      title={
+        <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
+          MISSION LOG
+        </h1>
+      }
+    >
+      <MissionLogTimeline experiences={experiences} />
+    </CosmicStickyTitleLayout>
   );
+
+  if (embed) return body;
+  return <CosmicPageShell>{body}</CosmicPageShell>;
 };
 
 export default MissionLog;

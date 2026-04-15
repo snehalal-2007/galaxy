@@ -90,11 +90,7 @@
         "Portfolio where user can see the stocks they have invested in and the performance of the stocks.",
         "Leaderboard and rewards system to motivate users to invest."
       ],
-      "images": [
-        "https://picsum.photos/seed/fintor-a/640/360",
-        "https://picsum.photos/seed/fintor-b/640/360",
-        "https://picsum.photos/seed/fintor-c/480/480"
-      ],
+      "images": [],
       "skills": [
         { "name": "Python" },
         { "name": "Gemini API" },

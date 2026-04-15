@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import type { ProjectPortfolioEntry } from "@/components/ProjectDetailView";
-import portfolioData from "@/data/projects.json";
+import { portfolioProjects } from "@/data/portfolioProjects";
 import galaxyTelescopeAscii from "@/data/galaxy-telescope.txt?raw";
 
 type Project = ProjectPortfolioEntry & { x: number; y: number };
@@ -28,7 +28,7 @@ function scatterForProject(id: string): { x: number; y: number } {
   };
 }
 
-const PROJECT_SEEDS = portfolioData.projects as ProjectPortfolioEntry[];
+const PROJECT_SEEDS = portfolioProjects;
 
 type GalaxyStar = {
   key: string;

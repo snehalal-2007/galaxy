@@ -1,6 +1,6 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import portfolioData from "@/data/projects.json";
+import { portfolioProjects } from "@/data/portfolioProjects";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import {
@@ -9,7 +9,7 @@ import {
   type ProjectPortfolioEntry,
 } from "@/components/ProjectDetailView";
 
-const seeds = portfolioData.projects as ProjectPortfolioEntry[];
+const seeds = portfolioProjects;
 
 const GalaxyProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();

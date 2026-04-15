@@ -119,7 +119,7 @@ function ProjectGalleryBox({
         <img
           src={images[index]}
           alt={`${title} screenshot ${index + 1} of ${images.length}`}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           loading="lazy"
         />
         {images.length > 1 ? (
@@ -163,7 +163,7 @@ function ProjectGalleryBox({
             type="button"
             onClick={() => setIndex(i)}
             className={cn(
-              "relative h-14 w-24 shrink-0 overflow-hidden rounded-md border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-[4.25rem] md:w-[7.25rem]",
+              "relative h-14 w-24 shrink-0 overflow-hidden rounded-md border border-border/70 bg-muted/40 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-[4.25rem] md:w-[7.25rem]",
               i === index
                 ? "border-foreground/55 ring-1 ring-foreground/25"
                 : "border-border/60 opacity-85 hover:opacity-100"
@@ -171,7 +171,7 @@ function ProjectGalleryBox({
             aria-label={`Show image ${i + 1}`}
             aria-current={i === index ? "true" : undefined}
           >
-            <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+            <img src={src} alt="" className="h-full w-full object-contain" loading="lazy" />
           </button>
         ))}
       </div>

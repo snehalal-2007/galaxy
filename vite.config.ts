@@ -6,8 +6,10 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    // `true` binds IPv4 + IPv6; `::` alone can break `localhost` → 127.0.0.1 in the browser.
+    host: true,
     port: 8080,
+    strictPort: false,
     hmr: {
       overlay: false,
     },

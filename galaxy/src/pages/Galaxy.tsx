@@ -179,16 +179,15 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
               );
             })}
           </div>
+          <pre
+            className="pointer-events-none -mt-[110px] hidden w-full max-w-[min(90vw,1000px)] overflow-x-auto font-mono text-[0.45rem] leading-[1.08] text-muted-foreground/70 [scrollbar-width:none] md:block md:w-max md:self-start md:pl-2 md:text-[0.5rem] lg:pl-4 [&::-webkit-scrollbar]:hidden"
+            style={{ textShadow: "0 0 10px hsl(var(--glow-color) / 0.12)" }}
+            aria-hidden="true"
+          >
+            {galaxyTelescopeAscii.trimEnd()}
+          </pre>
         </div>
       </CosmicStickyTitleLayout>
-
-      <pre
-        className="pointer-events-none fixed bottom-3 left-3 z-20 max-w-[min(100vw-1.25rem,380px)] overflow-x-auto font-mono text-[0.45rem] leading-[1.08] text-muted-foreground/80 [scrollbar-width:none] sm:bottom-4 sm:left-4 sm:text-[0.5rem] [&::-webkit-scrollbar]:hidden"
-        style={{ textShadow: "0 0 10px hsl(var(--glow-color) / 0.12)" }}
-        aria-hidden="true"
-      >
-        {galaxyTelescopeAscii.trimEnd()}
-      </pre>
     </>
   );
 

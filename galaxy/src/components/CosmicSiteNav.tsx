@@ -66,7 +66,7 @@ export function CosmicSiteNav() {
 
   return (
     <>
-      <div className="fixed top-6 left-6 z-30 md:hidden">
+      <div className="fixed top-6 left-6 z-40 md:hidden">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger asChild>
             <Button
@@ -119,7 +119,7 @@ export function CosmicSiteNav() {
       </div>
 
       <nav
-        className="fixed top-6 left-6 z-30 hidden flex-wrap gap-2 md:flex"
+        className="fixed top-6 left-6 z-40 hidden flex-wrap gap-2 md:flex"
         aria-label="Site navigation"
       >
         <NavCosmicLink to="/" end>

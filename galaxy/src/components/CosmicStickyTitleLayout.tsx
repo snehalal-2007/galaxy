@@ -43,8 +43,22 @@ export function CosmicStickyTitleLayout({
   return (
     <div className="flex h-[100dvh] max-h-[100dvh] flex-col overflow-hidden">
       <header className="relative z-20 shrink-0 border-b border-border/30 bg-background/50 backdrop-blur-md">
-        <div className={cn("mx-auto px-6 pt-24 md:pt-28 pb-3 md:pb-4", headerMw)}>
-          {title}
+        <div
+          className={cn(
+            "mx-auto pb-3 md:pb-4",
+            /*
+             * Phone: symmetric inset clears fixed menu (`left-6` + `h-11` + gap) on both sides
+             * so the title stays visually centered and does not sit under the menu control.
+             */
+            "px-[calc(1.5rem+2.75rem+0.75rem)] md:px-6",
+            /* Phone: same vertical band as fixed menu (`top-6` + `h-11` in CosmicSiteNav). */
+            "pt-6 md:pt-28",
+            headerMw
+          )}
+        >
+          <div className="flex min-h-11 items-center justify-center md:block md:min-h-0">
+            {title}
+          </div>
           {headerExtra ? <div className="mt-2 md:mt-2.5">{headerExtra}</div> : null}
         </div>
       </header>

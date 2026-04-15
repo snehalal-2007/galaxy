@@ -170,7 +170,7 @@ const About = () => {
         maxWidth="5xl"
         contentInnerClassName="pt-6 md:pt-10"
         title={
-          <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow">
+          <h1 className="cosmic-page-title text-center font-bold uppercase text-foreground text-glow text-balance leading-snug max-md:!tracking-[0.22em]">
             ABOUT THE SELENOPHILE
           </h1>
         }

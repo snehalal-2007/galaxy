@@ -34,6 +34,7 @@ const PROJECT_SEEDS = portfolioProjects;
 type GalaxyStar = {
   key: string;
   title: string;
+  description?: string;
   x: number;
   y: number;
   onSelect: () => void;
@@ -56,6 +57,7 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
     const projectStars: GalaxyStar[] = projects.map((p) => ({
       key: p.id,
       title: p.title,
+      description: p.description,
       x: p.x,
       y: p.y,
       onSelect: () => navigate(`/galaxy/project/${p.id}`),
@@ -80,6 +82,7 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
       {
         key: "galaxy-you-are-here",
         title: "Galaxy",
+        description: "You are viewing it right now ;)",
         x: metaX,
         y: metaY,
         onSelect: () =>
@@ -148,7 +151,7 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
                     left: pos.x,
                     top: pos.y,
                     transform: "translate(-50%, -50%)",
-                    zIndex: 2,
+                    zIndex: isHovered ? 30 : 2,
                   }}
                   onMouseEnter={() => setHovered(star.key)}
                   onMouseLeave={() => setHovered(null)}
@@ -176,6 +179,15 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
                   >
                     {star.title}
                   </span>
+                  {star.description ? (
+                    <span
+                      className="pointer-events-none absolute left-1/2 top-full z-50 mt-1.5 hidden w-[210px] -translate-x-1/2 rounded-md border border-border/60 bg-background/90 px-3 py-2 text-center text-[0.7rem] font-normal normal-case leading-snug tracking-normal text-muted-foreground shadow-lg backdrop-blur-sm transition-opacity duration-300 md:block"
+                      style={{ opacity: isHovered ? 1 : 0 }}
+                      aria-hidden="true"
+                    >
+                      {star.description}
+                    </span>
+                  ) : null}
                 </button>
               );
             })}

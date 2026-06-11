@@ -204,6 +204,8 @@ const Index = () => {
   const [reduceMotion, setReduceMotion] = useState(false);
   const navigate = useNavigate();
   const launchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const launchedRef = useRef(false);
+  const reduceMotionRef = useRef(false);
 
   useEffect(() => {
     const update = () => {
@@ -219,6 +221,7 @@ const Index = () => {
   // Honor reduced-motion; otherwise trigger the mount entrance on the next frame.
   useEffect(() => {
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    reduceMotionRef.current = reduce;
     if (reduce) {
       setReduceMotion(true);
       setPhase("idle");
@@ -235,15 +238,45 @@ const Index = () => {
     []
   );
 
-  const launch = () => {
-    if (phase === "launching") return;
-    if (reduceMotion) {
+  /** Runs the moon-expand launch into /about. Idempotent (button click + scroll share it). */
+  const launch = useCallback(() => {
+    if (launchedRef.current) return;
+    launchedRef.current = true;
+    if (reduceMotionRef.current) {
       navigate("/about");
       return;
     }
     setPhase("launching");
     launchTimer.current = setTimeout(() => navigate("/about"), LAUNCH_MS);
-  };
+  }, [navigate]);
+
+  // Scrolling down (or swiping up / arrow-down) launches into About, same as the button.
+  useEffect(() => {
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY > 10) launch();
+    };
+    let touchStartY = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0]?.clientY ?? 0;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      const y = e.touches[0]?.clientY ?? 0;
+      if (touchStartY - y > 40) launch();
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowDown" || e.key === "PageDown") launch();
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [launch]);
 
   const entering = phase === "enter";
   const launching = phase === "launching";

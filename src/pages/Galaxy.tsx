@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
+import { Reveal } from "@/components/Reveal";
 import type { ProjectPortfolioEntry } from "@/components/ProjectDetailView";
 import { portfolioProjects } from "@/data/portfolioProjects";
 import galaxyTelescopeAscii from "@/data/galaxy-telescope.txt?raw";
@@ -126,7 +127,7 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
           </h1>
         }
       >
-        <div className="flex flex-col items-center">
+        <Reveal y={0} className="flex flex-col items-center">
           <div
             ref={containerRef}
             className="relative z-10 mx-auto -mt-1 md:-mt-2"
@@ -186,7 +187,7 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
           >
             {galaxyTelescopeAscii.trimEnd()}
           </pre>
-        </div>
+        </Reveal>
       </CosmicStickyTitleLayout>
     </>
   );

@@ -1,0 +1,10 @@
+{
+  "certifications": [
+    { "id": "cert-1", "title": "AI Fundamentals", "issuer": "Google", "year": "2026", "verifyUrl": "https://www.coursera.org/account/accomplishments/verify/FL8P24VS8MD2" },
+    { "id": "cert-2", "title": "AI for App Building", "issuer": "Google", "year": "2026", "verifyUrl": "https://www.coursera.org/account/accomplishments/verify/U6J6Z12389NO" },
+    { "id": "cert-3", "title": "AI for Brainstorming and Planning", "issuer": "Google", "year": "2026", "verifyUrl": "https://www.coursera.org/account/accomplishments/verify/N9BYZFU7WAWS" },
+    { "id": "cert-4", "title": "AI for Research and Insights", "issuer": "Google", "year": "2026", "verifyUrl": "https://www.coursera.org/account/accomplishments/verify/R6P8559A2WZS" },
+    { "id": "cert-5", "title": "Python for Data Science, AI & Development", "issuer": "IBM", "year": "2026", "verifyUrl": "https://www.coursera.org/account/accomplishments/verify/428QFAKG5SJR" },
+    { "id": "cert-6", "title": "Getting Started with Git and GitHub", "issuer": "IBM", "year": "2026", "verifyUrl": "https://www.coursera.org/account/accomplishments/verify/WSUGH9GRZ8VV" }
+  ]
+}

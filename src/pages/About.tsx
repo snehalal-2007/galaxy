@@ -150,11 +150,17 @@ function TypewriterBio({
 
   return (
     <div
-      className="text-muted-foreground text-sm leading-relaxed md:text-base whitespace-pre-line pr-16 pb-10"
+      className="grid text-muted-foreground text-sm leading-relaxed md:text-base pr-16 pb-10"
       aria-busy={!complete}
     >
-      {shown}
-      {!complete && <span className="typewriter-caret" aria-hidden="true">|</span>}
+      {/* Invisible full-text spacer reserves the final height so the box never grows/reflows while typing. */}
+      <span className="invisible whitespace-pre-line [grid-area:1/1]" aria-hidden="true">
+        {text}
+      </span>
+      <div className="whitespace-pre-line [grid-area:1/1]">
+        {shown}
+        {!complete && <span className="typewriter-caret" aria-hidden="true">|</span>}
+      </div>
     </div>
   );
 }
@@ -190,7 +196,7 @@ export function AboutJourneySection() {
             <img
               src={profilePhoto}
               alt="Portrait"
-              className="h-full w-full object-cover"
+              className="h-full w-full scale-205 object-cover object-center"
               loading="lazy"
             />
           </div>

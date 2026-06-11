@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal";
 import { SkillTechIcon } from "@/lib/skillTechIcons";
 import { cn } from "@/lib/utils";
 
@@ -124,8 +125,10 @@ export function MissionLogTimeline({ experiences }: MissionLogTimelineProps) {
           const side = isLeft ? "right" : "left";
 
           return (
-            <li
+            <Reveal
+              as="li"
               key={`${exp.title}-${exp.organization}-${index}`}
+              delay={index * 80}
               className="group/experience-row relative md:grid md:grid-cols-2 md:items-center md:gap-10"
             >
               <TimelineNode className="left-[11px] top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-1/2 md:top-1/2" />
@@ -140,7 +143,7 @@ export function MissionLogTimeline({ experiences }: MissionLogTimelineProps) {
                   <ExperiencePanel exp={exp} side={side} />
                 </div>
               </div>
-            </li>
+            </Reveal>
           );
         })}
       </ol>

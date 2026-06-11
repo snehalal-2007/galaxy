@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import { renderMoonAsciiForPhaseDegrees } from "@/lib/realisticSkillsMoonAscii";
+import { Reveal } from "@/components/Reveal";
 import { SkillTechIcon } from "@/lib/skillTechIcons";
 import skillsData from "@/data/skills.json";
 
@@ -108,9 +109,11 @@ const Skills = ({ embed = false }: SkillsProps) => {
         }
       >
         <div className="space-y-7 md:space-y-8">
-          {sectionsWithPhase.map((section) => (
-            <section
+          {sectionsWithPhase.map((section, index) => (
+            <Reveal
+              as="section"
               key={section.id}
+              delay={index * 90}
               aria-labelledby={`skills-${section.id}-title`}
               className="grid grid-cols-1 items-start gap-5 border-b border-border/40 pb-7 last:border-b-0 last:pb-0 md:grid-cols-[minmax(0,148px)_1fr] md:items-center md:gap-8 md:pb-8"
             >
@@ -143,7 +146,7 @@ const Skills = ({ embed = false }: SkillsProps) => {
                   ))}
                 </ul>
               </div>
-            </section>
+            </Reveal>
           ))}
         </div>
       </CosmicStickyTitleLayout>

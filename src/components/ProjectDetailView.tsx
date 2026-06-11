@@ -127,18 +127,18 @@ function ProjectGalleryBox({
             <button
               type="button"
               onClick={goPrev}
-              className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/45 text-foreground backdrop-blur-sm transition hover:bg-black/65"
+              className="absolute left-1 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-foreground/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] transition hover:text-white hover:drop-shadow-[0_1px_5px_rgba(0,0,0,1)]"
               aria-label="Previous image"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-6 w-6" />
             </button>
             <button
               type="button"
               onClick={goNext}
-              className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/45 text-foreground backdrop-blur-sm transition hover:bg-black/65"
+              className="absolute right-1 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-foreground/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] transition hover:text-white hover:drop-shadow-[0_1px_5px_rgba(0,0,0,1)]"
               aria-label="Next image"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-6 w-6" />
             </button>
             <div className="pointer-events-none absolute bottom-2 left-0 right-0 text-center text-[0.65rem] tabular-nums tracking-wider text-foreground/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
               {index + 1} / {images.length}

@@ -110,6 +110,9 @@ export function CosmicSiteNav() {
               <MobileNavLink to="/mission-log" onNavigate={closeMobile}>
                 Experience
               </MobileNavLink>
+              <MobileNavLink to="/certifications" onNavigate={closeMobile}>
+                Certifications
+              </MobileNavLink>
               <MobileNavLink to="/galaxy" onNavigate={closeMobile}>
                 Galaxy
               </MobileNavLink>
@@ -119,7 +122,7 @@ export function CosmicSiteNav() {
       </div>
 
       <nav
-        className="fixed top-6 left-6 z-40 hidden flex-wrap gap-2 md:flex"
+        className="fixed top-6 left-6 z-40 hidden flex-wrap gap-2 rounded-xl border border-border/60 bg-background/85 p-1.5 shadow-lg shadow-black/40 backdrop-blur-md md:flex"
         aria-label="Site navigation"
       >
         <NavCosmicLink to="/" end>
@@ -129,6 +132,7 @@ export function CosmicSiteNav() {
         <NavCosmicLink to="/about">About</NavCosmicLink>
         <NavCosmicLink to="/skills">Skills</NavCosmicLink>
         <NavCosmicLink to="/mission-log">Experience</NavCosmicLink>
+        <NavCosmicLink to="/certifications">Certifications</NavCosmicLink>
         <NavCosmicLink to="/galaxy">Galaxy</NavCosmicLink>
       </nav>
     </>

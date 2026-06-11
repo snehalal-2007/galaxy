@@ -38,6 +38,7 @@ const App = () => (
             <Route path="about" element={<></>} />
             <Route path="skills" element={<></>} />
             <Route path="mission-log" element={<></>} />
+            <Route path="certifications" element={<></>} />
             <Route path="galaxy" element={<></>} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

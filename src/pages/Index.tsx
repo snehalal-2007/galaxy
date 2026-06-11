@@ -1,5 +1,5 @@
-import { useEffect, useRef, useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useCallback, useState, type CSSProperties } from "react";
+import { useNavigate } from "react-router-dom";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { Button } from "@/components/ui/button";
 
@@ -193,8 +193,17 @@ const MoonCanvas = ({ size }: { size: number }) => {
   return <canvas ref={canvasRef} style={{ width: size, height: size }} />;
 };
 
+/** Duration of the moon-expand launch before navigating to /about (ms). */
+const LAUNCH_MS = 850;
+
+type LaunchPhase = "enter" | "idle" | "launching";
+
 const Index = () => {
   const [moonSize, setMoonSize] = useState(0);
+  const [phase, setPhase] = useState<LaunchPhase>("enter");
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const navigate = useNavigate();
+  const launchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const update = () => {
@@ -207,22 +216,80 @@ const Index = () => {
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  // Honor reduced-motion; otherwise trigger the mount entrance on the next frame.
+  useEffect(() => {
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    if (reduce) {
+      setReduceMotion(true);
+      setPhase("idle");
+      return;
+    }
+    const raf = requestAnimationFrame(() => setPhase("idle"));
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (launchTimer.current) clearTimeout(launchTimer.current);
+    },
+    []
+  );
+
+  const launch = () => {
+    if (phase === "launching") return;
+    if (reduceMotion) {
+      navigate("/about");
+      return;
+    }
+    setPhase("launching");
+    launchTimer.current = setTimeout(() => navigate("/about"), LAUNCH_MS);
+  };
+
+  const entering = phase === "enter";
+  const launching = phase === "launching";
+
+  /** Title + button: rise + fade in on mount, quick fade out on launch. */
+  const fadeRiseStyle = (delay: number): CSSProperties => ({
+    opacity: entering || launching ? 0 : 1,
+    transform: entering ? "translateY(14px)" : "translateY(0)",
+    transition: launching
+      ? "opacity 240ms ease-in"
+      : "opacity 700ms ease-out, transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+    transitionDelay: launching ? "0ms" : `${delay}ms`,
+  });
+
   return (
     <CosmicPageShell showNav={false} className="flex flex-col items-center justify-center">
-      <h1 className="cosmic-page-title text-foreground font-bold uppercase text-glow mb-8 md:mb-12">
+      <h1
+        className="cosmic-page-title text-foreground font-bold uppercase text-glow mb-8 md:mb-12"
+        style={fadeRiseStyle(80)}
+      >
         MY GALAXY
       </h1>
 
-      <div className="relative z-10">
+      <div
+        className="relative z-10"
+        style={{
+          transformOrigin: "center center",
+          transform: launching ? "scale(9)" : entering ? "scale(0.82)" : "scale(1)",
+          opacity: launching || entering ? 0 : 1,
+          transition: launching
+            ? "transform 850ms cubic-bezier(0.6, 0, 0.85, 0.3), opacity 850ms ease-in"
+            : "transform 950ms cubic-bezier(0.22, 1, 0.36, 1), opacity 950ms ease-out",
+          transitionDelay: launching ? "0ms" : "180ms",
+          willChange: "transform, opacity",
+        }}
+      >
         <MoonCanvas size={moonSize} />
       </div>
 
-      <div className="relative z-10 mt-10 flex justify-center">
-        <Link to="/about">
-          <Button variant="cosmic" size="lg">
-            Enter the galaxy
-          </Button>
-        </Link>
+      <div
+        className="relative z-10 mt-10 flex justify-center"
+        style={{ ...fadeRiseStyle(360), pointerEvents: launching ? "none" : "auto" }}
+      >
+        <Button variant="cosmic" size="lg" onClick={launch}>
+          Enter the galaxy
+        </Button>
       </div>
     </CosmicPageShell>
   );

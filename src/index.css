@@ -124,6 +124,17 @@
   animation: mission-log-node-pulse 3.2s ease-in-out infinite;
 }
 
+@keyframes cert-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes mission-log-node-orbit {
   from {
     transform: rotate(0deg);

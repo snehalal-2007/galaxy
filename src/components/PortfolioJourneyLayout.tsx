@@ -1,7 +1,8 @@
-import { useCallback, useLayoutEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { AboutJourneySection } from "@/pages/About";
+import Certifications from "@/pages/Certifications";
 import Galaxy from "@/pages/Galaxy";
 import MissionLog from "@/pages/MissionLog";
 import Skills from "@/pages/Skills";
@@ -9,7 +10,7 @@ import Skills from "@/pages/Skills";
 const SCROLL_NAV_SUPPRESS_MS = 420;
 
 /** Routes that share one vertical scroll stack; pathname drives nav highlight. */
-export const JOURNEY_PATHS = ["/about", "/skills", "/mission-log", "/galaxy"] as const;
+export const JOURNEY_PATHS = ["/about", "/skills", "/mission-log", "/certifications", "/galaxy"] as const;
 
 function pathToSectionIndex(pathname: string): number {
   const i = JOURNEY_PATHS.indexOf(pathname as (typeof JOURNEY_PATHS)[number]);
@@ -25,11 +26,23 @@ export function PortfolioJourneyLayout() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<(HTMLElement | null)[]>([null, null, null, null]);
-  const offsetsRef = useRef<number[]>([0, 0, 0, 0]);
+  const sectionRefs = useRef<(HTMLElement | null)[]>([null, null, null, null, null]);
+  const offsetsRef = useRef<number[]>([0, 0, 0, 0, 0]);
   const ignoreScrollNavUntil = useRef(0);
   /** When true, pathname change came from scroll → URL sync; do not reset `scrollTop`. */
   const pathnameFromScroll = useRef(false);
+  /** Fade the journey content in when arriving (e.g. after the moon-launch from `/`). */
+  const [entered, setEntered] = useState(false);
+
+  useEffect(() => {
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    if (reduce) {
+      setEntered(true);
+      return;
+    }
+    const raf = requestAnimationFrame(() => setEntered(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   const measureOffsets = useCallback(() => {
     const root = scrollRef.current;
@@ -98,6 +111,10 @@ export function PortfolioJourneyLayout() {
         ref={scrollRef}
         onScroll={onScroll}
         className="relative h-[100dvh] overflow-x-hidden overflow-y-auto overscroll-y-contain"
+        style={{
+          opacity: entered ? 1 : 0,
+          transition: "opacity 600ms ease-out",
+        }}
         aria-label="Portfolio: scroll through About, Skills, Mission log, and Galaxy"
       >
         <section
@@ -122,7 +139,16 @@ export function PortfolioJourneyLayout() {
           <MissionLog embed />
         </section>
 
-        <section ref={setSectionRef(3)} id="galaxy" className="relative min-h-[100dvh]" aria-label="Galaxy">
+        <section
+          ref={setSectionRef(3)}
+          id="certifications"
+          className="relative min-h-[100dvh]"
+          aria-label="Certifications"
+        >
+          <Certifications embed />
+        </section>
+
+        <section ref={setSectionRef(4)} id="galaxy" className="relative min-h-[100dvh]" aria-label="Galaxy">
           <Galaxy embed />
         </section>
       </div>

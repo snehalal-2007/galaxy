@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { AboutJourneySection } from "@/pages/About";
 import Certifications from "@/pages/Certifications";
+import Education from "@/pages/Education";
 import Galaxy from "@/pages/Galaxy";
 import MissionLog from "@/pages/MissionLog";
 import Skills from "@/pages/Skills";
@@ -10,7 +11,7 @@ import Skills from "@/pages/Skills";
 const SCROLL_NAV_SUPPRESS_MS = 420;
 
 /** Routes that share one vertical scroll stack; pathname drives nav highlight. */
-export const JOURNEY_PATHS = ["/about", "/skills", "/mission-log", "/certifications", "/galaxy"] as const;
+export const JOURNEY_PATHS = ["/about", "/education", "/skills", "/mission-log", "/certifications", "/galaxy"] as const;
 
 function pathToSectionIndex(pathname: string): number {
   const i = JOURNEY_PATHS.indexOf(pathname as (typeof JOURNEY_PATHS)[number]);
@@ -26,8 +27,8 @@ export function PortfolioJourneyLayout() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<(HTMLElement | null)[]>([null, null, null, null, null]);
-  const offsetsRef = useRef<number[]>([0, 0, 0, 0, 0]);
+  const sectionRefs = useRef<(HTMLElement | null)[]>([null, null, null, null, null, null]);
+  const offsetsRef = useRef<number[]>([0, 0, 0, 0, 0, 0]);
   const ignoreScrollNavUntil = useRef(0);
   /** When true, pathname change came from scroll → URL sync; do not reset `scrollTop`. */
   const pathnameFromScroll = useRef(false);
@@ -115,7 +116,7 @@ export function PortfolioJourneyLayout() {
           opacity: entered ? 1 : 0,
           transition: "opacity 600ms ease-out",
         }}
-        aria-label="Portfolio: scroll through About, Skills, Mission log, and Galaxy"
+        aria-label="Portfolio: scroll through About, Education, Skills, Experience, Certifications, and Galaxy"
       >
         <section
           ref={setSectionRef(0)}
@@ -126,12 +127,21 @@ export function PortfolioJourneyLayout() {
           <AboutJourneySection />
         </section>
 
-        <section ref={setSectionRef(1)} id="skills" className="relative min-h-[100dvh]" aria-label="Skills">
+        <section
+          ref={setSectionRef(1)}
+          id="education"
+          className="relative min-h-[100dvh]"
+          aria-label="Education"
+        >
+          <Education embed />
+        </section>
+
+        <section ref={setSectionRef(2)} id="skills" className="relative min-h-[100dvh]" aria-label="Skills">
           <Skills embed />
         </section>
 
         <section
-          ref={setSectionRef(2)}
+          ref={setSectionRef(3)}
           id="mission-log"
           className="relative min-h-[100dvh]"
           aria-label="Mission log"
@@ -140,7 +150,7 @@ export function PortfolioJourneyLayout() {
         </section>
 
         <section
-          ref={setSectionRef(3)}
+          ref={setSectionRef(4)}
           id="certifications"
           className="relative min-h-[100dvh]"
           aria-label="Certifications"
@@ -148,7 +158,7 @@ export function PortfolioJourneyLayout() {
           <Certifications embed />
         </section>
 
-        <section ref={setSectionRef(4)} id="galaxy" className="relative min-h-[100dvh]" aria-label="Galaxy">
+        <section ref={setSectionRef(5)} id="galaxy" className="relative min-h-[100dvh]" aria-label="Galaxy">
           <Galaxy embed />
         </section>
       </div>

@@ -105,6 +105,9 @@ export function CosmicSiteNav() {
               <MobileNavLink to="/about" onNavigate={closeMobile}>
                 About
               </MobileNavLink>
+              <MobileNavLink to="/education" onNavigate={closeMobile}>
+                Education
+              </MobileNavLink>
               <MobileNavLink to="/skills" onNavigate={closeMobile}>
                 Skills
               </MobileNavLink>
@@ -145,6 +148,7 @@ export function CosmicSiteNav() {
           Home
         </NavCosmicLink>
         <NavCosmicLink to="/about">About</NavCosmicLink>
+        <NavCosmicLink to="/education">Education</NavCosmicLink>
         <NavCosmicLink to="/skills">Skills</NavCosmicLink>
         <NavCosmicLink to="/mission-log">Experience</NavCosmicLink>
         <NavCosmicLink to="/certifications">Certifications</NavCosmicLink>

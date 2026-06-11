@@ -36,6 +36,7 @@ const App = () => (
           <Route path="/galaxy/project/:projectId" element={<GalaxyProjectDetail />} />
           <Route element={<PortfolioJourneyLayout />}>
             <Route path="about" element={<></>} />
+            <Route path="education" element={<></>} />
             <Route path="skills" element={<></>} />
             <Route path="mission-log" element={<></>} />
             <Route path="certifications" element={<></>} />

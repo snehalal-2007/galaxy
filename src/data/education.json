@@ -1,0 +1,28 @@
+{
+  "education": [
+    {
+      "id": "utd",
+      "school": "University of Texas at Dallas",
+      "degree": "Bachelor of Science in Computer Science",
+      "timeline": "2025 – 2029",
+      "gpa": "4.0",
+      "details": [
+        "ACM UTD - Project Developer",
+        "UTD Honors Program",
+        "Hackathons - WEHack 2026, Hack AI 2026"
+      ]
+    },
+    {
+      "id": "prosper",
+      "school": "Prosper High School",
+      "degree": "High School Diploma",
+      "timeline": "2023 – 2025",
+      "gpa": "4.0",
+      "details": [
+        "PCIS - Career Independent Study",
+        "CS Club - Member",
+        "JSA Club - Debate Director"
+      ]
+    }
+  ]
+}

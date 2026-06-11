@@ -121,7 +121,7 @@ const Galaxy = ({ embed = false }: GalaxyProps) => {
         contentMaxWidth="full"
         headerExtra={
           <p className="text-muted-foreground text-center text-xs" style={{ letterSpacing: "0.2em" }}>
-            CLICK A STAR TO EXPLORE
+            MY PROJECTS | CLICK A STAR TO VIEW
           </p>
         }
         title={

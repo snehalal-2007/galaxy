@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
 const maxW = {
@@ -69,10 +70,18 @@ export function CosmicStickyTitleLayout({
             headerMw
           )}
         >
-          <div className="flex min-h-11 items-center justify-center md:block md:min-h-0">
+          <Reveal
+            as="div"
+            repeat
+            className="flex min-h-11 items-center justify-center md:block md:min-h-0"
+          >
             {title}
-          </div>
-          {headerExtra ? <div className="mt-2 md:mt-2.5">{headerExtra}</div> : null}
+          </Reveal>
+          {headerExtra ? (
+            <Reveal as="div" repeat delay={100} className="mt-2 md:mt-2.5">
+              {headerExtra}
+            </Reveal>
+          ) : null}
         </div>
       </header>
       <main

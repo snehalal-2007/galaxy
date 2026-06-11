@@ -129,6 +129,7 @@ export function MissionLogTimeline({ experiences }: MissionLogTimelineProps) {
               as="li"
               key={`${exp.title}-${exp.organization}-${index}`}
               delay={index * 80}
+              repeat
               className="group/experience-row relative md:grid md:grid-cols-2 md:items-center md:gap-10"
             >
               <TimelineNode className="left-[11px] top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-1/2 md:top-1/2" />

@@ -19,14 +19,17 @@ type RevealProps = {
   y?: number;
   /** Extra inline styles (merged underneath the reveal transform). */
   style?: CSSProperties;
+  /** Re-play the animation every time the element re-enters the viewport (not just once). */
+  repeat?: boolean;
   /** Any other props (e.g. aria-*, id) are forwarded to the rendered element. */
   [key: string]: unknown;
 };
 
 /**
- * Fades + slides its children up the first time they scroll into view.
- * Dependency-free (IntersectionObserver). Honors `prefers-reduced-motion`
- * by showing content immediately with no transition.
+ * Fades + slides its children up when they scroll into view. With `repeat`, it
+ * also fades back out when they leave and replays on re-entry. Dependency-free
+ * (IntersectionObserver). Honors `prefers-reduced-motion` by showing content
+ * immediately with no transition.
  */
 export function Reveal({
   children,
@@ -35,6 +38,7 @@ export function Reveal({
   delay = 0,
   y = 24,
   style,
+  repeat = false,
   ...rest
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
@@ -55,7 +59,10 @@ export function Reveal({
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setShown(true);
-            obs.unobserve(entry.target);
+            if (!repeat) obs.unobserve(entry.target);
+          } else if (repeat) {
+            // Reset so the reveal replays the next time it scrolls back into view.
+            setShown(false);
           }
         }
       },
@@ -64,7 +71,7 @@ export function Reveal({
 
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [repeat]);
 
   const revealStyle: CSSProperties = {
     ...style,

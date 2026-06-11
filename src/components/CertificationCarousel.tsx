@@ -79,10 +79,15 @@ export function CertificationCarousel({ items }: { items: Certification[] }) {
     });
   };
 
-  // Re-center the active card when switching into the desktop layout.
+  // Center the active card horizontally when entering the desktop layout. Set
+  // scrollLeft DIRECTLY (not scrollIntoView, which would also scroll the page
+  // vertically to this section — e.g. hijacking the "Enter the galaxy" → About jump).
   useEffect(() => {
     if (!isDesktop) return;
-    cardRefs.current[active]?.scrollIntoView({ behavior: "auto", inline: "center", block: "nearest" });
+    const root = scrollerRef.current;
+    const el = cardRefs.current[active];
+    if (!root || !el) return;
+    root.scrollLeft = el.offsetLeft + el.offsetWidth / 2 - root.clientWidth / 2;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDesktop]);
 

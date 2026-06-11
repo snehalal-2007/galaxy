@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import siteIcon from "./data/profile.png";
+import siteIcon from "./data/icon.jpg";
 
 function applySiteIcon(href: string) {
   const ensure = (rel: "icon" | "apple-touch-icon") => {

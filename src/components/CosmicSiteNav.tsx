@@ -4,6 +4,7 @@ import { ArrowLeft, Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { resumeUrl } from "@/data/resume";
 
 /** Merged on top of cosmic nav buttons when this route is active (`NavLink` must own `className` — not `Button asChild`). */
 const activeNavClass = "border-foreground/65 bg-foreground/[0.14]";
@@ -116,6 +117,20 @@ export function CosmicSiteNav() {
               <MobileNavLink to="/galaxy" onNavigate={closeMobile}>
                 Galaxy
               </MobileNavLink>
+              {resumeUrl ? (
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobile}
+                  className={cn(
+                    buttonVariants({ variant: "cosmic", size: "default" }),
+                    "h-12 w-full justify-start px-4 text-left tracking-[0.18em]"
+                  )}
+                >
+                  Resume
+                </a>
+              ) : null}
             </nav>
           </SheetContent>
         </Sheet>
@@ -134,6 +149,16 @@ export function CosmicSiteNav() {
         <NavCosmicLink to="/mission-log">Experience</NavCosmicLink>
         <NavCosmicLink to="/certifications">Certifications</NavCosmicLink>
         <NavCosmicLink to="/galaxy">Galaxy</NavCosmicLink>
+        {resumeUrl ? (
+          <a
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonVariants({ variant: "cosmic", size: "sm" })}
+          >
+            Resume
+          </a>
+        ) : null}
       </nav>
     </>
   );

@@ -7,6 +7,8 @@ export type EducationEntry = {
   timeline: string;
   gpa?: string;
   details?: string[];
+  /** Set true when the logo is transparent — renders on a white backing, contained with padding. */
+  logoBg?: boolean;
   /** Resolved logo image URL (Vite-hashed), attached by id below. */
   logo?: string;
 };
@@ -25,6 +27,7 @@ const byName = (name: RegExp): string | undefined =>
 const logoById: Record<string, string | undefined> = {
   utd: byName(/UTD\.png$/i),
   prosper: byName(/PHS\.png$/i),
+  sarvodaya: byName(/sarvodaya\.png$/i),
 };
 
 export const education: EducationEntry[] = (educationData.education as EducationEntry[]).map(

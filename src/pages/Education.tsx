@@ -2,6 +2,7 @@ import { GraduationCap } from "lucide-react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import { Reveal } from "@/components/Reveal";
+import { cn } from "@/lib/utils";
 import { education as ENTRIES } from "@/data/education";
 
 type EducationProps = { /** Render without `CosmicPageShell` for the scroll journey. */ embed?: boolean };
@@ -29,11 +30,16 @@ const Education = ({ embed = false }: EducationProps) => {
           >
             <div className="flex items-start gap-4">
               {e.logo ? (
-                <span className="mt-0.5 inline-flex h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border/70">
+                <span
+                  className={cn(
+                    "mt-0.5 inline-flex h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border/70",
+                    e.logoBg && "bg-white"
+                  )}
+                >
                   <img
                     src={e.logo}
                     alt={`${e.school} logo`}
-                    className="h-full w-full object-cover"
+                    className={cn("h-full w-full", e.logoBg ? "object-contain p-1.5" : "object-cover")}
                     loading="lazy"
                   />
                 </span>

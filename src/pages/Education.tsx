@@ -2,18 +2,7 @@ import { GraduationCap } from "lucide-react";
 import { CosmicPageShell } from "@/components/CosmicPageShell";
 import { CosmicStickyTitleLayout } from "@/components/CosmicStickyTitleLayout";
 import { Reveal } from "@/components/Reveal";
-import educationData from "@/data/education.json";
-
-type EducationEntry = {
-  id: string;
-  school: string;
-  degree: string;
-  timeline: string;
-  gpa?: string;
-  details?: string[];
-};
-
-const ENTRIES = educationData.education as EducationEntry[];
+import { education as ENTRIES } from "@/data/education";
 
 type EducationProps = { /** Render without `CosmicPageShell` for the scroll journey. */ embed?: boolean };
 
@@ -39,9 +28,20 @@ const Education = ({ embed = false }: EducationProps) => {
             style={{ boxShadow: "0 0 24px rgba(40,55,80,0.12), inset 0 0 0 1px rgba(255,255,255,0.04)" }}
           >
             <div className="flex items-start gap-4">
-              <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background/50 text-foreground">
-                <GraduationCap className="h-5 w-5" strokeWidth={1.75} aria-hidden />
-              </span>
+              {e.logo ? (
+                <span className="mt-0.5 inline-flex h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border/70">
+                  <img
+                    src={e.logo}
+                    alt={`${e.school} logo`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </span>
+              ) : (
+                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background/50 text-foreground">
+                  <GraduationCap className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+                </span>
+              )}
 
               <div className="min-w-0 flex-1">
                 <div className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between md:gap-4">
